@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TIẾNG TRUNG CÔ TUYẾT · LUYỆN ĐỌC CẤP ĐỘ TRUNG CẤP</title>
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Times New Roman', serif;
+            background: linear-gradient(145deg, #f8f4ef 0%, #f0ebe5 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+        /* ===== 主容器 ===== */
+        .app-wrapper {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        /* ===== 顶部标题 ===== */
+        .app-header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding: 16px 0 8px 0;
+            position: relative;
+        }
+        .app-header h1 {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #3d2c1e;
+            letter-spacing: 8px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            display: inline-block;
+            padding: 0 50px;
+            position: relative;
+        }
+        .app-header h1::before,
+        .app-header h1::after {
+            content: '✦';
+            font-size: 1.4rem;
+            color: #c4a88a;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .app-header h1::before {
+            left: 0;
+        }
+        .app-header h1::after {
+            right: 0;
+        }
+        .app-header .sub {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            color: #b09a84;
+            letter-spacing: 4px;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* ===== 主页 ===== */
+        .page-home {
+            display: block;
+        }
+        .page-home.hidden {
+            display: none;
+        }
+
+        /* ===== 文档卡片网格 ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 22px;
+            margin-top: 18px;
+        }
+        .doc-card {
+            background: #fcf9f6;
+            border-radius: 28px;
+            padding: 28px 20px 22px 20px;
+            border: 1px solid #f0e8e0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .doc-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
+            border-color: #d4c5b8;
+            background: #fffcf9;
+        }
+        .doc-card:active {
+            transform: translateY(-2px);
+        }
+        .doc-card .card-zh {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-size: 1.3rem;
+            color: #2d1f14;
+            letter-spacing: 2px;
+            line-height: 1.5;
+        }
+        .doc-card .card-vi {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9rem;
+            color: #b09a84;
+            margin-top: 6px;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        .doc-card .card-icon {
+            font-size: 1.6rem;
+            margin-bottom: 6px;
+            opacity: 0.6;
+        }
+
+        /* ===== 学习页面 ===== */
+        .page-study {
+            display: none;
+        }
+        .page-study.active {
+            display: block;
+        }
+
+        .study-container {
+            background: #fffffffa;
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.10), 0 10px 30px rgba(0, 0, 0, 0.06);
+            padding: 40px 44px 44px 44px;
+            border: 1px solid rgba(255, 245, 235, 0.5);
+            position: relative;
+        }
+        .study-container .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 28px;
+            font-family: 'Times New Roman', serif;
+            font-size: 0.95rem;
+            background: #f0e8e0;
+            border: none;
+            border-radius: 40px;
+            padding: 8px 22px;
+            cursor: pointer;
+            color: #3d2c1e;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #e0d3c8;
+        }
+        .study-container .back-btn:hover {
+            background: #e8ddd4;
+            transform: translateX(-3px);
+        }
+
+        /* ===== 学习页标题 ===== */
+        .study-title-area {
+            text-align: center;
+            margin-bottom: 18px;
+            padding-top: 6px;
+        }
+        .study-title-area h2 {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #3d2c1e;
+            letter-spacing: 5px;
+            display: inline-block;
+            padding: 0 36px;
+            position: relative;
+        }
+        .study-title-area h2::before,
+        .study-title-area h2::after {
+            content: '✦';
+            font-size: 1.0rem;
+            color: #c4a88a;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .study-title-area h2::before {
+            left: 0;
+        }
+        .study-title-area h2::after {
+            right: 0;
+        }
+        .study-title-area .sub-vi {
+            font-family: 'Times New Roman', serif;
+            font-size: 1rem;
+            color: #b09a84;
+            letter-spacing: 2px;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        /* ===== 计时器 ===== */
+        .timer-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            background: #f6f1ec;
+            padding: 14px 30px;
+            border-radius: 60px;
+            margin: 10px auto 28px auto;
+            max-width: 580px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e8ddd4;
+        }
+        .timer-display {
+            font-family: 'Times New Roman', monospace;
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #3d2c1e;
+            min-width: 100px;
+            text-align: center;
+            background: #fffcf9;
+            padding: 0 16px;
+            border-radius: 30px;
+            line-height: 1.4;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+        .timer-btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .timer-btn {
+            font-family: 'Times New Roman', serif;
+            font-size: 1rem;
+            padding: 8px 22px;
+            border: none;
+            border-radius: 40px;
+            background: #e8ddd4;
+            color: #3d2c1e;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid transparent;
+        }
+        .timer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+        }
+        .timer-btn:active {
+            transform: translateY(0px);
+        }
+        .timer-btn.start {
+            background: #b5d3c6;
+            color: #2a4a3a;
+        }
+        .timer-btn.start:hover {
+            background: #a3c5b6;
+        }
+        .timer-btn.pause {
+            background: #e8d5b7;
+            color: #5d4e37;
+        }
+        .timer-btn.pause:hover {
+            background: #dec9a8;
+        }
+        .timer-btn.stop {
+            background: #eac8c8;
+            color: #7a3e3e;
+        }
+        .timer-btn.stop:hover {
+            background: #e0b8b8;
+        }
+        .timer-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* ===== 主内容 ===== */
+        .main-content {
+            display: flex;
+            gap: 36px;
+            margin-top: 12px;
+            min-height: 380px;
+        }
+        .text-area {
+            flex: 2;
+            min-width: 0;
+        }
+        .text-block {
+            background: #fcf9f6;
+            border-radius: 28px;
+            padding: 28px 32px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0e8e0;
+            transition: border-color 0.25s;
+        }
+        .text-block:hover {
+            border-color: #e0d3c8;
+        }
+        .text-chinese {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-size: 1.55rem;
+            line-height: 2.1;
+            color: #1e1a16;
+            letter-spacing: 0.03em;
+            word-break: break-word;
+        }
+        .text-chinese .word-token {
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+            border-radius: 4px;
+            padding: 0 1px;
+            position: relative;
+        }
+        .text-chinese .word-token:hover {
+            background: #f0e8e0;
+            color: #1e1a16;
+        }
+        .text-chinese .word-token.active {
+            background: #e8ddd4;
+            color: #2d1f14;
+        }
+
+        /* ===== 词汇详情面板 ===== */
+        .word-detail-panel {
+            flex: 1;
+            min-width: 220px;
+            max-width: 340px;
+            background: #fcf9f6;
+            border-radius: 28px;
+            padding: 24px 22px;
+            border: 1px solid #f0e8e0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s;
+            min-height: 320px;
+            align-self: stretch;
+        }
+        .word-detail-panel .panel-label {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #bfae9c;
+            border-bottom: 1px solid #ede5dc;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+        .word-detail-panel .detail-placeholder {
+            font-family: 'Times New Roman', serif;
+            font-size: 1rem;
+            color: #bfae9c;
+            text-align: center;
+            margin-top: 40px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        .word-detail-panel .detail-content {
+            flex: 1;
+        }
+        .word-detail-panel .detail-item {
+            margin-bottom: 14px;
+        }
+        .word-detail-panel .detail-item .label {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #b09a84;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .word-detail-panel .detail-item .value {
+            font-size: 1.1rem;
+            color: #1e1a16;
+        }
+        .word-detail-panel .detail-item .value.hanzi {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #2d1f14;
+        }
+        .word-detail-panel .detail-item .value.pinyin {
+            font-family: '华文细黑', 'STHeiti Light', 'Microsoft YaHei', sans-serif;
+            font-size: 1.2rem;
+            color: #5d4e37;
+        }
+        .word-detail-panel .detail-item .value.loai {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.05rem;
+            color: #5d4e37;
+        }
+        .word-detail-panel .detail-item .value.nghia {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.05rem;
+            color: #1e1a16;
+            line-height: 1.5;
+        }
+        .detail-divider {
+            height: 1px;
+            background: #ede5dc;
+            margin: 12px 0 14px 0;
+        }
+
+        /* ===== 底部按钮 ===== */
+        .bottom-actions {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 60px;
+            background: #f0e8e0;
+            color: #3d2c1e;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e0d3c8;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+            background: #e8ddd4;
+            border-color: #d0c0b2;
+        }
+        .action-btn:active {
+            transform: translateY(0px);
+        }
+        .action-btn.primary {
+            background: #d4c5b8;
+            border-color: #c4b2a2;
+        }
+        .action-btn.primary:hover {
+            background: #cbb9aa;
+        }
+        .action-btn .icon {
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        /* ===== 模态框 ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 26, 22, 0.45);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-box {
+            background: #fcf9f6;
+            border-radius: 48px;
+            max-width: 860px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 44px 48px 38px 48px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.20);
+            transform: scale(0.96) translateY(12px);
+            transition: transform 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            border: 1px solid rgba(255, 245, 235, 0.3);
+            position: relative;
+        }
+        .modal-overlay.show .modal-box {
+            transform: scale(1) translateY(0);
+        }
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.6rem;
+            background: none;
+            border: none;
+            color: #bfae9c;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 40px;
+            transition: all 0.2s;
+            line-height: 1;
+            z-index: 10;
+            background: #fcf9f6;
+            margin-top: -8px;
+            margin-right: -8px;
+        }
+        .modal-close:hover {
+            background: #ede5dc;
+            color: #3d2c1e;
+        }
+        .modal-title {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-size: 1.6rem;
+            color: #3d2c1e;
+            margin-bottom: 20px;
+            padding-right: 40px;
+            letter-spacing: 2px;
+        }
+        .modal-body {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #1e1a16;
+        }
+        .modal-body .chinese-block {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-size: 1.5rem;
+            line-height: 2.2;
+            padding: 16px 0 12px 0;
+            letter-spacing: 0.03em;
+        }
+        .modal-body .chinese-block .pause-part {
+            border-radius: 6px;
+            padding: 2px 6px;
+            margin: 0 1px;
+            transition: background 0.2s;
+        }
+        .modal-body .vietnamese-block {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            padding: 16px 0 8px 0;
+            border-top: 1px dashed #e8ddd4;
+            margin-top: 12px;
+            color: #1e1a16;
+        }
+        .modal-body .pause-slash {
+            font-family: 'Times New Roman', serif;
+            font-weight: 700;
+            color: #b09a84;
+            margin: 0 4px;
+            font-size: 1.3rem;
+        }
+        .modal-body .label-vi {
+            font-family: 'Times New Roman', serif;
+            font-weight: 400;
+            color: #b09a84;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 14px;
+            margin-bottom: 4px;
+        }
+        .modal-body .label-zh {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-weight: 400;
+            color: #b09a84;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+        .pause-header {
+            margin-bottom: 22px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #ede5dc;
+        }
+        .pause-header .title-zh {
+            font-family: 'STKaiti', 'KaiTi', '楷体', '华文楷体', serif;
+            font-size: 1.5rem;
+            color: #3d2c1e;
+            letter-spacing: 3px;
+        }
+        .pause-header .title-vi {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            color: #b09a84;
+            letter-spacing: 1px;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        /* ===== 滚动条 ===== */
+        .modal-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-box::-webkit-scrollbar-track {
+            background: #f0ebe5;
+            border-radius: 10px;
+        }
+        .modal-box::-webkit-scrollbar-thumb {
+            background: #d4c5b8;
+            border-radius: 10px;
+        }
+        .modal-box::-webkit-scrollbar-thumb:hover {
+            background: #c4b2a2;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 860px) {
+            .study-container {
+                padding: 28px 22px 32px 22px;
+                border-radius: 32px;
+            }
+            .main-content {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .word-detail-panel {
+                max-width: 100%;
+                min-height: 160px;
+                flex: 0 1 auto;
+            }
+            .app-header h1 {
+                font-size: 2.0rem;
+                padding: 0 30px;
+            }
+            .app-header h1::before,
+            .app-header h1::after {
+                display: none;
+            }
+            .study-title-area h2 {
+                font-size: 1.8rem;
+                padding: 0 30px;
+            }
+            .study-title-area h2::before,
+            .study-title-area h2::after {
+                display: none;
+            }
+            .text-chinese {
+                font-size: 1.3rem;
+                line-height: 1.9;
+            }
+            .timer-section {
+                padding: 12px 20px;
+                gap: 14px;
+            }
+            .timer-display {
+                font-size: 1.8rem;
+                min-width: 80px;
+            }
+            .timer-btn {
+                font-size: 0.85rem;
+                padding: 6px 16px;
+            }
+            .action-btn {
+                font-size: 0.95rem;
+                padding: 12px 28px;
+            }
+            .modal-box {
+                padding: 30px 24px 28px 24px;
+                border-radius: 32px;
+            }
+            .modal-body .chinese-block {
+                font-size: 1.25rem;
+            }
+            .modal-body .vietnamese-block {
+                font-size: 1rem;
+            }
+            .study-container .back-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 16px;
+                display: inline-flex;
+            }
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 16px;
+            }
+            .doc-card {
+                min-height: 100px;
+                padding: 20px 14px 16px 14px;
+            }
+            .doc-card .card-zh {
+                font-size: 1.1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .app-header h1 {
+                font-size: 1.5rem;
+                letter-spacing: 4px;
+            }
+            .study-container {
+                padding: 18px 14px 22px 14px;
+                border-radius: 24px;
+            }
+            .study-title-area h2 {
+                font-size: 1.4rem;
+                letter-spacing: 3px;
+            }
+            .text-chinese {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+            .timer-display {
+                font-size: 1.5rem;
+                min-width: 70px;
+            }
+            .timer-btn {
+                font-size: 0.75rem;
+                padding: 5px 12px;
+            }
+            .word-detail-panel {
+                padding: 18px 16px;
+                min-height: 120px;
+            }
+            .action-btn {
+                font-size: 0.85rem;
+                padding: 10px 20px;
+            }
+            .modal-box {
+                padding: 22px 16px 20px 16px;
+                border-radius: 24px;
+            }
+            .modal-body .chinese-block {
+                font-size: 1.05rem;
+            }
+            .modal-body .vietnamese-block {
+                font-size: 0.9rem;
+            }
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+            }
+            .doc-card {
+                min-height: 80px;
+                padding: 14px 10px 12px 10px;
+            }
+            .doc-card .card-zh {
+                font-size: 0.95rem;
+            }
+            .doc-card .card-vi {
+                font-size: 0.75rem;
+            }
+            .doc-card .card-icon {
+                font-size: 1.2rem;
+                margin-bottom: 2px;
+            }
+            .app-header .sub {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper">
+
+        <!-- ===== 顶部标题 ===== -->
+        <header class="app-header">
+            <h1>每日文摘</h1>
+            <div class="sub">✦ 本游戏由陈映雪老师开发 · Trò chơi này do cô Tuyết phát triển ✦</div>
+        </header>
+
+        <!-- ===== 主页 ===== -->
+        <div class="page-home" id="pageHome">
+            <div class="card-grid" id="cardGrid"></div>
+        </div>
+
+        <!-- ===== 学习页面 ===== -->
+        <div class="page-study" id="pageStudy">
+            <div class="study-container" id="studyContainer">
+                <button class="back-btn" id="backHome">← 返回 · TRỞ LẠI</button>
+
+                <div class="study-title-area">
+                    <h2 id="studyTitle">靠自己努力奔跑</h2>
+                    <div class="sub-vi" id="studySub">Tự mình nỗ lực chạy trên con đường của mình</div>
+                </div>
+
+                <!-- 计时器 -->
+                <div class="timer-section">
+                    <span class="timer-display" id="timerDisplay">00:00</span>
+                    <div class="timer-btn-group">
+                        <button class="timer-btn start" id="timerStart">开始 / Bắt đầu</button>
+                        <button class="timer-btn pause" id="timerPause" disabled>暂停 / Tạm dừng</button>
+                        <button class="timer-btn stop" id="timerStop" disabled>结束 / Kết thúc</button>
+                    </div>
+                </div>
+
+                <!-- 主内容 -->
+                <div class="main-content">
+                    <div class="text-area">
+                        <div class="text-block">
+                            <div class="text-chinese" id="chineseText"></div>
+                        </div>
+                    </div>
+                    <div class="word-detail-panel" id="wordPanel">
+                        <div class="panel-label">✦ 词汇详情 · TỪ VỰNG</div>
+                        <div class="detail-content" id="detailContent">
+                            <div class="detail-placeholder">🖱 悬停词汇 ·<br />Di chuột vào từ để xem chi tiết</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 底部按钮 -->
+                <div class="bottom-actions">
+                    <button class="action-btn primary" id="btnTranslate">
+                        <span class="icon">📖</span> 看翻译版 · XEM BẢN DỊCH
+                    </button>
+                    <button class="action-btn" id="btnPausePractice">
+                        <span class="icon">✧</span> 练停顿 · LUYỆN NGẮT NGHỈ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== 模态框 ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-title" id="modalTitle">📘 文本</div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        //  所有文档数据
+        // ================================================================
+
+        const DOCUMENTS = [{
+            id: 'buhaipa',
+            title: '不害怕犯错',
+            subtitle: 'Không sợ phạm sai lầm',
+            icon: '🌱',
+            chinese: '成长，就是在一次次犯错里学会长大。别怕做错题目，别怕说错答案，别怕被批评，别怕被嘲笑。犯错不是失败，而是学习的开始。每一次跌倒，都是在为下次站得更稳蓄力；每一次失误，都是在帮你找到更对的方向。允许自己不完美，允许自己慢慢来，只要不放弃，就永远不算输。',
+            vietnamese: 'Trưởng thành chính là học cách lớn lên qua từng lần phạm sai lầm. Đừng sợ làm sai đề bài, đừng sợ nói sai đáp án, đừng sợ bị phê bình, đừng sợ bị cười nhạo. Phạm lỗi không phải là thất bại, mà là khởi đầu của việc học. Mỗi lần vấp ngã đều là để tích lũy sức mạnh, giúp bạn đứng vững hơn ở lần sau; mỗi lần sai sót đều giúp bạn tìm ra hướng đi đúng đắn hơn. Hãy cho phép bản thân không hoàn hảo, hãy cho phép bản thân từ từ tiến bước. Miễn là không từ bỏ, bạn sẽ không bao giờ thua cuộc.',
+            vocabulary: [
+                { word: '成长', pinyin: 'chéng zhǎng', loai: 'động từ / danh từ', nghia: 'trưởng thành; sự lớn lên.' },
+                { word: '就是', pinyin: 'jiù shì', loai: 'phó từ', nghia: 'chính là, tức là; đúng là' },
+                { word: '一次', pinyin: 'yī cì', loai: 'số lượng từ', nghia: 'một lần' },
+                { word: '犯错', pinyin: 'fàn cuò', loai: 'động từ', nghia: 'phạm lỗi, mắc sai lầm' },
+                { word: '学会', pinyin: 'xué huì', loai: 'động từ', nghia: 'học được, nắm vững kiến thức hay kỹ năng' },
+                { word: '长大', pinyin: 'zhǎng dà', loai: 'động từ', nghia: 'lớn lên, trưởng thành về tuổi tác' },
+                { word: '做错', pinyin: 'zuò cuò', loai: 'động từ', nghia: 'làm sai, thực hiện sai' },
+                { word: '题目', pinyin: 'tí mù', loai: 'danh từ', nghia: 'đề bài, câu hỏi trong bài kiểm tra' },
+                { word: '说错', pinyin: 'shuō cuò', loai: 'động từ', nghia: 'nói sai, phát biểu sai' },
+                { word: '答案', pinyin: 'dá àn', loai: 'danh từ', nghia: 'đáp án, câu trả lời cho câu hỏi' },
+                { word: '批评', pinyin: 'pī píng', loai: 'động từ / danh từ', nghia: 'phê bình; sự phê bình, chỉ ra khuyết điểm' },
+                { word: '嘲笑', pinyin: 'cháo xiào', loai: 'động từ / danh từ', nghia: 'chế nhạo, cười nhạo; sự chế nhạo' },
+                { word: '失败', pinyin: 'shī bài', loai: 'động từ / danh từ', nghia: 'thất bại; sự thất bại' },
+                { word: '而是', pinyin: 'ér shì', loai: 'liên từ', nghia: 'mà là, trái lại là' },
+                { word: '学习', pinyin: 'xué xí', loai: 'động từ / danh từ', nghia: 'học tập; sự học tập, nghiên cứu' },
+                { word: '开始', pinyin: 'kāi shǐ', loai: 'động từ / danh từ', nghia: 'bắt đầu; sự bắt đầu, khởi đầu' },
+                { word: '跌倒', pinyin: 'diē dǎo', loai: 'động từ', nghia: 'ngã, té xuống; (nghĩa bóng) gặp thất bại' },
+                { word: '下次', pinyin: 'xià cì', loai: 'danh từ', nghia: 'lần sau, lần tới' },
+                { word: '蓄力', pinyin: 'xù lì', loai: 'động từ', nghia: 'tích lũy sức mạnh, chuẩn bị năng lượng' },
+                { word: '失误', pinyin: 'shī wù', loai: 'động từ / danh từ', nghia: 'sai sót, sơ suất; sự sai lầm không chủ ý' },
+                { word: '找到', pinyin: 'zhǎo dào', loai: 'động từ', nghia: 'tìm thấy, tìm ra' },
+                { word: '方向', pinyin: 'fāng xiàng', loai: 'danh từ', nghia: 'phương hướng, hướng đi' },
+                { word: '允许', pinyin: 'yǔn xǔ', loai: 'động từ', nghia: 'cho phép, đồng ý' },
+                { word: '自己', pinyin: 'zì jǐ', loai: 'đại từ', nghia: 'bản thân, tự mình' },
+                { word: '完美', pinyin: 'wán měi', loai: 'tính từ', nghia: 'hoàn hảo, hoàn mỹ, không có khuyết điểm' },
+                { word: '慢慢', pinyin: 'màn màn', loai: 'phó từ', nghia: 'từ từ, chậm rãi' },
+                { word: '只要', pinyin: 'zhǐ yào', loai: 'liên từ', nghia: 'miễn là, chỉ cần' },
+                { word: '放弃', pinyin: 'fàng qì', loai: 'động từ', nghia: 'từ bỏ, buông bỏ' },
+                { word: '永远', pinyin: 'yǒng yuǎn', loai: 'phó từ', nghia: 'mãi mãi, vĩnh viễn' },
+                { word: '在', pinyin: 'zài', loai: 'giới từ / động từ / phó từ', nghia: 'ở; trong; đang (chỉ hành động đang diễn ra)' },
+                { word: '里', pinyin: 'lǐ', loai: 'danh từ chỉ phương hướng / trợ từ', nghia: 'trong, bên trong' },
+                { word: '别', pinyin: 'bié', loai: 'phó từ', nghia: 'đừng, đừng có (chỉ sự cấm, ngăn cản)' },
+                { word: '怕', pinyin: 'pà', loai: 'động từ', nghia: 'sợ, ngại' },
+                { word: '说', pinyin: 'shuō', loai: 'động từ', nghia: 'nói, phát biểu, trình bày' },
+                { word: '错', pinyin: 'cuò', loai: 'tính từ / danh từ', nghia: 'sai; lỗi, sai lầm' },
+                { word: '被', pinyin: 'bèi', loai: 'giới từ / trợ từ', nghia: 'bị (dùng cấu tạo câu bị động)' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ', nghia: 'không (dùng để phủ định)' },
+                { word: '而', pinyin: 'ér', loai: 'liên từ', nghia: 'mà, nhưng, hơn nữa' },
+                { word: '的', pinyin: 'de', loai: 'trợ từ', nghia: 'của; dùng tạo cấu trúc định ngữ bổ nghĩa danh từ' },
+                { word: '每', pinyin: 'měi', loai: 'tính từ / đại từ', nghia: 'mỗi, mọi' },
+                { word: '都', pinyin: 'dōu', loai: 'phó từ', nghia: 'đều, tất cả' },
+                { word: '为', pinyin: 'wèi', loai: 'giới từ', nghia: 'vì, cho, vì lợi ích của' },
+                { word: '站', pinyin: 'zhàn', loai: 'động từ', nghia: 'đứng' },
+                { word: '得', pinyin: 'de', loai: 'trợ từ', nghia: 'dùng sau động từ/tính từ chỉ kết quả, mức độ hành động' },
+                { word: '更', pinyin: 'gèng', loai: 'phó từ', nghia: 'hơn, càng (chỉ mức độ tăng thêm)' },
+                { word: '稳', pinyin: 'wěn', loai: 'tính từ', nghia: 'vững, ổn định, không lung lay' },
+                { word: '帮', pinyin: 'bāng', loai: 'động từ', nghia: 'giúp, giúp đỡ' },
+                { word: '你', pinyin: 'nǐ', loai: 'đại từ nhân xưng', nghia: 'bạn, cậu (xưng hô đối thoại)' },
+                { word: '对', pinyin: 'duì', loai: 'tính từ', nghia: 'đúng, chính xác' },
+                { word: '来', pinyin: 'lái', loai: 'động từ', nghia: 'đến, tới; về phía người nói' },
+                { word: '就', pinyin: 'jiù', loai: 'phó từ', nghia: 'thì, liền, chính' },
+                { word: '是', pinyin: 'shì', loai: 'động từ', nghia: 'là (động từ phán đoán)' },
+                { word: '算', pinyin: 'suàn', loai: 'động từ', nghia: 'tính là, coi là, xem là' },
+                { word: '输', pinyin: 'shū', loai: 'động từ', nghia: 'thua, bại cuộc' },
+                { word: '一', pinyin: 'yī', loai: 'số từ', nghia: 'một' },
+                { word: '次', pinyin: 'cì', loai: 'lượng từ', nghia: 'lần (đơn vị đếm số lần lặp lại hành động)' }
+            ],
+            pauseData: [{
+                zh: '成长，就是在一次次犯错里学会长大。',
+                parts: ['成长，', '就是', '在一次次犯错里', '学会长大。'],
+                vi: 'Trưởng thành chính là học cách lớn lên qua từng lần phạm sai lầm.'
+            }, {
+                zh: '别怕做错题目，别怕说错答案，别怕被批评，别怕被嘲笑。',
+                parts: ['别怕做错题目，', '别怕说错答案，', '别怕被批评，', '别怕被嘲笑。'],
+                vi: 'Đừng sợ làm sai đề bài, đừng sợ nói sai đáp án, đừng sợ bị phê bình, đừng sợ bị cười nhạo.'
+            }, {
+                zh: '犯错不是失败，而是学习的开始。',
+                parts: ['犯错不是失败，', '而是学习的开始。'],
+                vi: 'Phạm lỗi không phải là thất bại, mà là khởi đầu của việc học.'
+            }, {
+                zh: '每一次跌倒，都是在为下次站得更稳蓄力；',
+                parts: ['每一次跌倒，', '都是在为', '下次站得更稳', '蓄力；'],
+                vi: 'Mỗi lần vấp ngã đều là để tích lũy sức mạnh, giúp bạn đứng vững hơn ở lần sau;'
+            }, {
+                zh: '每一次失误，都是在帮你找到更对的方向。',
+                parts: ['每一次失误，', '都是在帮你', '找到更对的', '方向。'],
+                vi: 'mỗi lần sai sót đều giúp bạn tìm ra hướng đi đúng đắn hơn.'
+            }, {
+                zh: '允许自己不完美，允许自己慢慢来，只要不放弃，就永远不算输。',
+                parts: ['允许自己', '不完美，', '允许自己', '慢慢来，', '只要不放弃，', '就永远不算输。'],
+                vi: 'Hãy cho phép bản thân không hoàn hảo, hãy cho phép bản thân từ từ tiến bước. Miễn là không từ bỏ, bạn sẽ không bao giờ thua cuộc.'
+            }]
+        }, {
+            id: 'zha gen',
+            title: '成长就像扎根',
+            subtitle: 'Sự trưởng thành như rễ cây cắm sâu',
+            icon: '🌿',
+            chinese: '很多时候，我们努力了，却看不到结果；坚持了，却看不到希望。于是开始怀疑，开始动摇，甚至想要放弃。可你知道吗？成长就像竹子，前几年它都在土里悄悄扎根，等根扎稳了，它就会飞快地长高。人生也是如此，很多努力不是没有效果，而是在悄悄扎根。',
+            vietnamese: 'Có rất nhiều lúc, chúng ta nỗ lực nhưng chẳng thấy kết quả; kiên trì nhưng chẳng thấy hy vọng. Thế rồi ta bắt đầu hoài nghi, dao động, thậm chí muốn buông xuôi. Nhưng bạn có biết không? Sự trưởng thành cũng giống như cây tre vậy. Những năm đầu, nó âm thầm cắm rễ sâu dưới lòng đất, chờ khi rễ đã vững chắc, nó sẽ vươn lên thật nhanh. Cuộc đời cũng thế. Nhiều khi sự cố gắng không phải là vô ích, mà chính là lúc bạn đang âm thầm cắm rễ.',
+            vocabulary: [
+                { word: '很', pinyin: 'hěn', loai: 'phó từ', nghia: 'rất' },
+                { word: '多', pinyin: 'duō', loai: 'tính từ', nghia: 'nhiều' },
+                { word: '时候', pinyin: 'shí hou', loai: 'danh từ', nghia: 'lúc, thời điểm, khoảnh khắc' },
+                { word: '我们', pinyin: 'wǒ men', loai: 'đại từ nhân xưng', nghia: 'chúng ta, chúng tôi' },
+                { word: '努力', pinyin: 'nǔ lì', loai: 'động từ / danh từ', nghia: 'cố gắng; sự nỗ lực, sự cố gắng' },
+                { word: '看', pinyin: 'kàn', loai: 'động từ', nghia: 'Nhìn,xem' },
+                { word: '结果', pinyin: 'jié guǒ', loai: 'danh từ', nghia: 'kết quả, thành quả cuối cùng' },
+                { word: '坚持', pinyin: 'jiān chí', loai: 'động từ / danh từ', nghia: 'kiên trì; sự giữ vững mục tiêu không từ bỏ' },
+                { word: '希望', pinyin: 'xī wàng', loai: 'danh từ / động từ', nghia: 'hy vọng; mong muốn tốt đẹp' },
+                { word: '于是', pinyin: 'yú shì', loai: 'liên từ', nghia: 'vì vậy, do đó, sau đó' },
+                { word: '开始', pinyin: 'kāi shǐ', loai: 'động từ / danh từ', nghia: 'bắt đầu; sự khởi đầu' },
+                { word: '怀疑', pinyin: 'huái yí', loai: 'động từ / danh từ', nghia: 'nghi ngờ; sự không tin tưởng, do dự' },
+                { word: '动摇', pinyin: 'dòng yáo', loai: 'động từ / tính từ', nghia: 'lung lay, dao động; mất kiên định' },
+                { word: '甚至', pinyin: 'shèn zhì', loai: 'phó từ / liên từ', nghia: 'thậm chí, thậm chí còn (nhấn mạnh mức độ)' },
+                { word: '想要', pinyin: 'xiǎng yào', loai: 'động từ', nghia: 'muốn, mong muốn có hay làm điều gì' },
+                { word: '放弃', pinyin: 'fàng qì', loai: 'động từ', nghia: 'từ bỏ, buông bỏ, không tiếp tục nữa' },
+                { word: '知道', pinyin: 'zhī dào', loai: 'động từ', nghia: 'biết, hiểu rõ, nắm được thông tin' },
+                { word: '成长', pinyin: 'chéng zhǎng', loai: 'động từ / danh từ', nghia: 'trưởng thành; sự phát triển lớn lên' },
+                { word: '竹子', pinyin: 'zhú zi', loai: 'danh từ', nghia: 'cây tre' },
+                { word: '几年', pinyin: 'jǐ nián', loai: 'danh từ', nghia: 'vài năm, mấy năm (số lượng năm không nhiều)' },
+                { word: '土里', pinyin: 'tǔ lǐ', loai: 'danh từ', nghia: 'trong đất, bên trong lớp đất' },
+                { word: '悄悄', pinyin: 'qiāo qiāo', loai: 'phó từ', nghia: 'lặng lẽ, âm thầm, không để người khác nhận ra' },
+                { word: '扎根', pinyin: 'zhā gēn', loai: 'động từ', nghia: 'đâm rễ; (nghĩa bóng) đặt nền tảng vững chắc' },
+                { word: '扎稳', pinyin: 'zhā wěn', loai: 'động từ', nghia: 'cắm vững, đâm rễ chắc chắn không lung lay' },
+                { word: '飞快', pinyin: 'fēi kuài', loai: 'phó từ / tính từ', nghia: 'nhanh như gió, tốc độ cực kỳ cao' },
+                { word: '长高', pinyin: 'zhǎng gāo', loai: 'động từ', nghia: 'cao lên, lớn lên theo chiều cao' },
+                { word: '人生', pinyin: 'rén shēng', loai: 'danh từ', nghia: 'cuộc đời, đời người' },
+                { word: '如此', pinyin: 'rú cǐ', loai: 'phó từ / tính từ', nghia: 'như vậy, thế này' },
+                { word: '没有', pinyin: 'méi yǒu', loai: 'động từ / phó từ', nghia: 'không có; chưa, không (phủ định)' },
+                { word: '效果', pinyin: 'xiào guǒ', loai: 'danh từ', nghia: 'hiệu quả, kết quả mang lại từ hành động' },
+                { word: '却', pinyin: 'què', loai: 'liên từ / phó từ', nghia: 'nhưng, lại (chỉ sự đối lập)' },
+                { word: '了', pinyin: 'le', loai: 'trợ từ thì', nghia: 'dùng chỉ hành động đã hoàn thành hoặc trạng thái thay đổi' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ phủ định', nghia: 'không' },
+                { word: '可', pinyin: 'kě', loai: 'liên từ', nghia: 'nhưng, tuy nhiên' },
+                { word: '你', pinyin: 'nǐ', loai: 'đại từ nhân xưng', nghia: 'bạn, cậu' },
+                { word: '吗', pinyin: 'ma', loai: 'trợ từ nghi vấn', nghia: 'dùng cuối câu hỏi để tạo nghi vấn' },
+                { word: '就', pinyin: 'jiù', loai: 'phó từ', nghia: 'thì, liền, ngay lập tức' },
+                { word: '像', pinyin: 'xiàng', loai: 'động từ / giới từ', nghia: 'giống như, tựa như' },
+                { word: '前', pinyin: 'qián', loai: 'tính từ', nghia: 'trước, phía trước (về thời gian hay không gian)' },
+                { word: '它', pinyin: 'tā', loai: 'đại từ', nghia: 'nó (chỉ vật, động vật)' },
+                { word: '都', pinyin: 'dōu', loai: 'phó từ', nghia: 'đều, tất cả' },
+                { word: '在', pinyin: 'zài', loai: 'giới từ / phó từ', nghia: 'ở; đang (chỉ hành động đang diễn ra)' },
+                { word: '等', pinyin: 'děng', loai: 'động từ', nghia: 'chờ đợi, đợi đến khi' },
+                { word: '根', pinyin: 'gēn', loai: 'danh từ', nghia: 'rễ cây; nền tảng, gốc rễ' },
+                { word: '会', pinyin: 'huì', loai: 'trợ động từ', nghia: 'sẽ, có khả năng làm gì' },
+                { word: '地', pinyin: 'de', loai: 'trợ từ', nghia: 'dùng sau tính trạng từ, bổ nghĩa cho động từ theo sau' },
+                { word: '也', pinyin: 'yě', loai: 'phó từ', nghia: 'cũng' },
+                { word: '是', pinyin: 'shì', loai: 'động từ', nghia: 'là' },
+                { word: '而', pinyin: 'ér', loai: 'liên từ', nghia: 'mà (thường dùng trong cấu trúc đối lập)' }
+            ],
+            pauseData: [{
+                zh: '很多时候，我们努力了，却看不到结果；',
+                parts: ['很多时候，', '我们努力了，', '却看不到结果；'],
+                vi: 'Có rất nhiều lúc, chúng ta nỗ lực nhưng chẳng thấy kết quả;'
+            }, {
+                zh: '坚持了，却看不到希望。',
+                parts: ['坚持了，', '却看不到希望。'],
+                vi: 'kiên trì nhưng chẳng thấy hy vọng.'
+            }, {
+                zh: '于是开始怀疑，开始动摇，甚至想要放弃。',
+                parts: ['于是开始怀疑，', '开始动摇，', '甚至想要放弃。'],
+                vi: 'Thế rồi ta bắt đầu hoài nghi, dao động, thậm chí muốn buông xuôi.'
+            }, {
+                zh: '可你知道吗？成长就像竹子，前几年它都在土里悄悄扎根，',
+                parts: ['可你知道吗？', '成长就像竹子，', '前几年它都在土里', '悄悄扎根，'],
+                vi: 'Nhưng bạn có biết không? Sự trưởng thành cũng giống như cây tre vậy. Những năm đầu, nó âm thầm cắm rễ sâu dưới lòng đất,'
+            }, {
+                zh: '等根扎稳了，它就会飞快地长高。',
+                parts: ['等根扎稳了，', '它就会', '飞快地长高。'],
+                vi: 'chờ khi rễ đã vững chắc, nó sẽ vươn lên thật nhanh.'
+            }, {
+                zh: '人生也是如此，很多努力不是没有效果，而是在悄悄扎根。',
+                parts: ['人生也是如此，', '很多努力', '不是没有效果，', '而是在悄悄扎根。'],
+                vi: 'Cuộc đời cũng thế. Nhiều khi sự cố gắng không phải là vô ích, mà chính là lúc bạn đang âm thầm cắm rễ.'
+            }]
+        }, {
+            id: 'jianchi',
+            title: '坚持拉开差距',
+            subtitle: 'Sự kiên trì tạo nên khoảng cách',
+            icon: '🔥',
+            chinese: '这世上从来不缺少努力的人，缺少的是能坚持到底的人，千万不要小瞧别人的日积月累，这些努力到最后都会变成你们之间的差距。',
+            vietnamese: 'Trên đời này không thiếu những người nỗ lực, nhưng thiếu những người có thể kiên trì đến cùng. Đừng bao giờ xem thường sự tích lũy từng ngày của người khác, bởi vì những nỗ lực đó đến cuối cùng sẽ trở thành khoảng cách giữa bạn và họ.',
+            vocabulary: [
+                { word: '世上', pinyin: 'shì shàng', loai: 'danh từ', nghia: 'trên đời, thế giới, trong nhân gian' },
+                { word: '从来', pinyin: 'cóng lái', loai: 'phó từ', nghia: 'từ xưa đến nay, bao giờ cũng' },
+                { word: '缺少', pinyin: 'quē shǎo', loai: 'động từ / danh từ', nghia: 'thiếu, thiếu hụt; sự thiếu vắng' },
+                { word: '努力', pinyin: 'nǔ lì', loai: 'động từ / danh từ', nghia: 'cố gắng; sự nỗ lực, sự chăm chỉ' },
+                { word: '坚持', pinyin: 'jiān chí', loai: 'động từ / danh từ', nghia: 'kiên trì; sự giữ vững mục tiêu không từ bỏ' },
+                { word: '到底', pinyin: 'dào dǐ', loai: 'phó từ', nghia: 'đến cùng, đến cuối cùng; rốt cuộc' },
+                { word: '千万', pinyin: 'qiān wàn', loai: 'phó từ', nghia: 'tuyệt đối, hãy chắc chắn (dùng để dặn dò, nhắc nhở)' },
+                { word: '不要', pinyin: 'bù yào', loai: 'phó từ', nghia: 'đừng, không nên, không được phép' },
+                { word: '小瞧', pinyin: 'xiǎo qiáo', loai: 'động từ', nghia: 'coi thường, xem nhẹ, nhìn thấp người khác' },
+                { word: '别人', pinyin: 'bié rén', loai: 'đại từ / danh từ', nghia: 'người khác, người bên ngoài' },
+                { word: '这些', pinyin: 'zhè xiē', loai: 'đại từ chỉ định', nghia: 'những cái này, những điều này' },
+                { word: '最后', pinyin: 'zuì hòu', loai: 'danh từ / phó từ', nghia: 'cuối cùng; thời điểm cuối cùng' },
+                { word: '变成', pinyin: 'biàn chéng', loai: 'động từ', nghia: 'trở thành, hóa thành hình thái khác' },
+                { word: '你们', pinyin: 'nǐ men', loai: 'đại từ nhân xưng', nghia: 'các bạn, các cậu (xưng hô thứ hai số nhiều)' },
+                { word: '之间', pinyin: 'zhī jiān', loai: 'danh từ', nghia: 'giữa, khoảng cách giữa hai đối tượng' },
+                { word: '差距', pinyin: 'chā jù', loai: 'danh từ', nghia: 'khoảng cách, sự chênh lệch về năng lực hay điều kiện' },
+                { word: '日积月累', pinyin: 'rì jī yuè lěi', loai: 'thành ngữ', nghia: 'tích lũy dần dần qua từng ngày từng tháng; sự tích góp lâu dài' },
+                { word: '这', pinyin: 'zhè', loai: 'đại từ chỉ định', nghia: 'này, đây (chỉ người hay vật ở gần)' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ phủ định', nghia: 'không' },
+                { word: '的', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'của; dùng tạo cấu trúc định ngữ bổ nghĩa danh từ' },
+                { word: '人', pinyin: 'rén', loai: 'danh từ', nghia: 'người, con người' },
+                { word: '是', pinyin: 'shì', loai: 'động từ phán đoán', nghia: 'là' },
+                { word: '能', pinyin: 'néng', loai: 'trợ động từ', nghia: 'có thể, có khả năng làm gì' },
+                { word: '到', pinyin: 'dào', loai: 'giới từ / động từ', nghia: 'đến, tới; đạt đến mức độ nào đó' },
+                { word: '都', pinyin: 'dōu', loai: 'phó từ', nghia: 'đều, tất cả' },
+                { word: '会', pinyin: 'huì', loai: 'trợ động từ', nghia: 'sẽ; có khả năng, biết làm điều gì' }
+            ],
+            pauseData: [{
+                zh: '这世上从来不缺少努力的人，缺少的是能坚持到底的人，',
+                parts: ['这世上', '从来不缺少', '努力的人，', '缺少的是', '能坚持到底的人，'],
+                vi: 'Trên đời này không thiếu những người nỗ lực, nhưng thiếu những người có thể kiên trì đến cùng.'
+            }, {
+                zh: '千万不要小瞧别人的日积月累，这些努力到最后都会变成你们之间的差距。',
+                parts: ['千万不要', '小瞧别人的', '日积月累，', '这些努力', '到最后都会变成', '你们之间的差距。'],
+                vi: 'Đừng bao giờ xem thường sự tích lũy từng ngày của người khác, bởi vì những nỗ lực đó đến cuối cùng sẽ trở thành khoảng cách giữa bạn và họ.'
+            }]
+        }, {
+            id: 'benpao',
+            title: '靠自己努力奔跑',
+            subtitle: 'Tự mình nỗ lực chạy trên con đường của mình',
+            icon: '🏃',
+            chinese: '有人在奔跑，有人在睡觉；有人在感恩，有人在抱怨。如果没有躺赢的命，那就站起来努力奔跑。如果自己不努力，谁也给不了你想要的生活。',
+            vietnamese: 'Có người đang chạy, có người đang ngủ; có người biết ơn, có người than phiền. Nếu bạn không có số được thắng mà không cần phải làm gì, thì hãy đứng dậy và cố gắng chạy. Nếu bản thân bạn không nỗ lực, thì chẳng ai có thể cho bạn cuộc sống mà bạn mong muốn.',
+            vocabulary: [
+                { word: '奔跑', pinyin: 'bēn pǎo', loai: 'động từ', nghia: 'chạy nhanh; (nghĩa bóng) phấn đấu, nỗ lực vượt lên' },
+                { word: '睡觉', pinyin: 'shuì jiào', loai: 'động từ', nghia: 'ngủ, đi ngủ, nghỉ ngơi bằng giấc ngủ' },
+                { word: '感恩', pinyin: 'gǎn ēn', loai: 'động từ / danh từ', nghia: 'biết ơn, ghi nhận công ơn; lòng biết ơn' },
+                { word: '抱怨', pinyin: 'bào yuàn', loai: 'động từ / danh từ', nghia: 'phàn nàn, than vãn, oán trách; sự phàn nàn' },
+                { word: '躺赢', pinyin: 'tǎng yíng', loai: 'động từ (ngôn ngữ mạng)', nghia: 'thắng lợi một cách dễ dàng, không cần nỗ lực cũng có thể thành công' },
+                { word: '起来', pinyin: 'qǐ lái', loai: 'động từ xu hướng', nghia: 'đứng dậy; lên (bổ nghĩa hướng hành động cho động từ đứng trước)' },
+                { word: '努力', pinyin: 'nǔ lì', loai: 'động từ / danh từ', nghia: 'cố gắng, nỗ lực; sự cố gắng, sự nỗ lực' },
+                { word: '如果', pinyin: 'rú guǒ', loai: 'liên từ', nghia: 'nếu, giả sử, trong trường hợp là' },
+                { word: '没有', pinyin: 'méi yǒu', loai: 'động từ / phó từ', nghia: 'không có; chưa, không (phủ định sự tồn tại hay hành động đã xảy ra)' },
+                { word: '自己', pinyin: 'zì jǐ', loai: 'đại từ', nghia: 'bản thân, tự mình, chính mình' },
+                { word: '想要', pinyin: 'xiǎng yào', loai: 'động từ', nghia: 'muốn, mong muốn có được hay thực hiện điều gì' },
+                { word: '生活', pinyin: 'shēng huó', loai: 'danh từ / động từ', nghia: 'cuộc sống; sinh hoạt, tồn tại trong cuộc sống' },
+                { word: '人', pinyin: 'rén', loai: 'danh từ', nghia: 'người' },
+                { word: '在', pinyin: 'zài', loai: 'phó từ / giới từ', nghia: 'đang (chỉ hành động đang diễn ra); ở, trong' },
+                { word: '有', pinyin: 'yǒu', loai: 'động từ', nghia: 'có, tồn tại' },
+                { word: '命', pinyin: 'mìng', loai: 'danh từ', nghia: 'số phận, định mệnh; mạng sống' },
+                { word: '那', pinyin: 'nà', loai: 'đại từ chỉ định / liên từ', nghia: 'đó, kia; vậy thì, thì' },
+                { word: '就', pinyin: 'jiù', loai: 'phó từ / liên từ', nghia: 'liền, ngay; thì, chính là' },
+                { word: '站', pinyin: 'zhàn', loai: 'động từ', nghia: 'đứng' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ phủ định', nghia: 'không' },
+                { word: '谁', pinyin: 'shuí/shéi', loai: 'đại từ nghi vấn / đại từ bất định', nghia: 'ai; bất kỳ ai' },
+                { word: '也', pinyin: 'yě', loai: 'phó từ', nghia: 'cũng, đều' },
+                { word: '给', pinyin: 'gěi', loai: 'động từ / giới từ', nghia: 'cho, trao; dành cho, mang lại cho' },
+                { word: '了', pinyin: 'le', loai: 'trợ từ thì', nghia: 'dùng chỉ hành động đã hoàn thành hoặc trạng thái đã thay đổi' },
+                { word: '你', pinyin: 'nǐ', loai: 'đại từ nhân xưng', nghia: 'bạn, cậu' },
+                { word: '的', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'của; dùng tạo cấu trúc định ngữ bổ nghĩa danh từ' }
+            ],
+            pauseData: [{
+                zh: '有人在奔跑，有人在睡觉；有人在感恩，有人在抱怨。',
+                parts: ['有人在奔跑，', '有人在睡觉；', '有人在感恩，', '有人在抱怨。'],
+                vi: 'Có người đang chạy, có người đang ngủ; có người biết ơn, có người than phiền.'
+            }, {
+                zh: '如果没有躺赢的命，那就站起来努力奔跑。',
+                parts: ['如果没有', '躺赢的命，', '那就站起来', '努力奔跑。'],
+                vi: 'Nếu bạn không có số được thắng mà không cần phải làm gì, thì hãy đứng dậy và cố gắng chạy.'
+            }, {
+                zh: '如果自己不努力，谁也给不了你想要的生活。',
+                parts: ['如果自己', '不努力，', '谁也给不了', '你想要的生活。'],
+                vi: 'Nếu bản thân bạn không nỗ lực, thì chẳng ai có thể cho bạn cuộc sống mà bạn mong muốn.'
+            }]
+        }, {
+            id: 'nuli yiyi',
+            title: '努力的意义',
+            subtitle: 'Ý nghĩa của sự nỗ lực',
+            icon: '💎',
+            chinese: '努力不是为了要超越别人，而是给自己一个交代。美好的东西从不会轻易获得，成功靠的不是豪言壮语，而是脚踏实地的努力。',
+            vietnamese: 'Nỗ lực không phải để vượt qua người khác, mà là để tự cho bản thân một lời giải đáp. Những điều tốt đẹp không bao giờ dễ dàng có được. Thành công không đến từ những lời nói hoành tráng, mà từ sự nỗ lực kiên trì, vững chắc từng bước một.',
+            vocabulary: [
+                { word: '努力', pinyin: 'nǔ lì', loai: 'động từ / danh từ', nghia: 'cố gắng; sự nỗ lực, sự cố gắng' },
+                { word: '意义', pinyin: 'yì yì', loai: 'danh từ', nghia: 'ý nghĩa, giá trị cốt lõi của sự vật' },
+                { word: '为了', pinyin: 'wèi le', loai: 'giới từ', nghia: 'vì, nhằm mục đích, để' },
+                { word: '超越', pinyin: 'chāo yuè', loai: 'động từ', nghia: 'vượt qua, vượt lên trên' },
+                { word: '别人', pinyin: 'bié rén', loai: 'đại từ / danh từ', nghia: 'người khác, người bên ngoài' },
+                { word: '而是', pinyin: 'ér shì', loai: 'liên từ', nghia: 'mà là (dùng trong cấu trúc đối lập)' },
+                { word: '自己', pinyin: 'zì jǐ', loai: 'đại từ', nghia: 'bản thân, tự mình' },
+                { word: '交代', pinyin: 'jiāo dài', loai: 'động từ / danh từ', nghia: 'lời giải thích, sự làm rõ; sự trả lời xứng đáng cho bản thân' },
+                { word: '美好', pinyin: 'měi hǎo', loai: 'tính từ', nghia: 'tốt đẹp, tuyệt vời, đáng mong muốn' },
+                { word: '东西', pinyin: 'dōng xi', loai: 'danh từ', nghia: 'thứ, đồ vật, sự vật' },
+                { word: '不会', pinyin: 'bù huì', loai: 'trợ động từ', nghia: 'sẽ không, không có khả năng làm gì' },
+                { word: '轻易', pinyin: 'qīng yì', loai: 'phó từ / tính từ', nghia: 'dễ dàng; một cách vội vàng, không cân nhắc kỹ' },
+                { word: '获得', pinyin: 'huò dé', loai: 'động từ', nghia: 'đạt được, giành được, nhận được' },
+                { word: '成功', pinyin: 'chéng gōng', loai: 'động từ / danh từ', nghia: 'thành công; sự thành công, kết quả tốt đẹp' },
+                { word: '豪言壮语', pinyin: 'háo yán zhuàng yǔ', loai: 'thành ngữ', nghia: 'những lời nói hùng tráng, đầy khí thế nhưng thường thiếu tính thực tế' },
+                { word: '脚踏实地', pinyin: 'jiǎo tà shí dì', loai: 'thành ngữ', nghia: 'bước chân đạp trên đất thật; làm việc chân thực, thực tế, không ảo tưởng' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ phủ định', nghia: 'không' },
+                { word: '是', pinyin: 'shì', loai: 'động từ phán đoán', nghia: 'là' },
+                { word: '要', pinyin: 'yào', loai: 'trợ động từ', nghia: 'muốn, cần phải, định làm gì' },
+                { word: '给', pinyin: 'gěi', loai: 'động từ / giới từ', nghia: 'cho, dành cho, trao cho' },
+                { word: '一', pinyin: 'yī', loai: 'số từ', nghia: 'một' },
+                { word: '个', pinyin: 'gè', loai: 'lượng từ', nghia: 'cái, người (đơn vị đếm chung cho người và vật)' },
+                { word: '从', pinyin: 'cóng', loai: 'giới từ / phó từ', nghia: 'từ, bắt đầu từ; bao giờ (thường dùng trong cấu trúc phủ định)' },
+                { word: '靠', pinyin: 'kào', loai: 'động từ / giới từ', nghia: 'dựa vào, nhờ vào; tựa vào' },
+                { word: '的', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'của; dùng tạo cấu trúc định ngữ bổ nghĩa danh từ' }
+            ],
+            pauseData: [{
+                zh: '努力不是为了要超越别人，而是给自己一个交代。',
+                parts: ['努力不是为了', '要超越别人，', '而是给自己', '一个交代。'],
+                vi: 'Nỗ lực không phải để vượt qua người khác, mà là để tự cho bản thân một lời giải đáp.'
+            }, {
+                zh: '美好的东西从不会轻易获得，成功靠的不是豪言壮语，而是脚踏实地的努力。',
+                parts: ['美好的东西', '从不会轻易获得，', '成功靠的', '不是豪言壮语，', '而是脚踏实地的努力。'],
+                vi: 'Những điều tốt đẹp không bao giờ dễ dàng có được. Thành công không đến từ những lời nói hoành tráng, mà từ sự nỗ lực kiên trì, vững chắc từng bước một.'
+            }]
+        }, {
+            id: 'qiuxue',
+            title: '求学路，靠自己走',
+            subtitle: 'Con đường học tập, tự mình bước đi',
+            icon: '📚',
+            chinese: '没有人会一直监督，老师只是你的引路人，家长只是你的后勤保障。漫漫求学路，你自己才是主角。唯有自己努力，才能掌控和决定自己的人生。能帮助你走向优秀的，只有你自己坚定的信念，对目标的不懈坚持，以及不断超越自我的决心和毅力。',
+            vietnamese: 'Không ai sẽ giám sát bạn mãi mãi. Giáo viên chỉ là người dẫn đường của bạn, còn phụ huynh chỉ là người đảm bảo hậu cần cho bạn. Trên con đường dài học tập, chính bạn mới là nhân vật chính. Chỉ có bản thân mình cố gắng, bạn mới có thể nắm giữ và quyết định cuộc đời của mình. Điều duy nhất có thể giúp bạn trở nên xuất sắc chính là niềm tin kiên định của bản thân, sự kiên trì không ngừng với mục tiêu, cũng như quyết tâm và ý chí không ngừng vượt qua chính mình.',
+            vocabulary: [
+                { word: '人', pinyin: 'rén', loai: 'Danh từ', nghia: 'người' },
+                { word: '会', pinyin: 'huì', loai: 'Động từ năng nguyện', nghia: 'biết, sẽ, có thể' },
+                { word: '你', pinyin: 'nǐ', loai: 'Đại từ nhân xưng', nghia: 'bạn' },
+                { word: '的', pinyin: 'de', loai: 'Trợ từ', nghia: 'của' },
+                { word: '路', pinyin: 'lù', loai: 'Danh từ', nghia: 'con đường' },
+                { word: '才', pinyin: 'cái', loai: 'Phó từ', nghia: 'mới' },
+                { word: '是', pinyin: 'shì', loai: 'Động từ', nghia: 'là' },
+                { word: '能', pinyin: 'néng', loai: 'Động từ năng nguyện', nghia: 'có thể, có khả năng' },
+                { word: '和', pinyin: 'hé', loai: 'Liên từ', nghia: 'và' },
+                { word: '只', pinyin: 'zhǐ', loai: 'Phó từ', nghia: 'chỉ' },
+                { word: '对', pinyin: 'duì', loai: 'Giới từ', nghia: 'đối với' },
+                { word: '有', pinyin: 'yǒu', loai: 'Động từ', nghia: 'có' },
+                { word: '没有', pinyin: 'méiyǒu', loai: 'Động từ', nghia: 'không có' },
+                { word: '一直', pinyin: 'yīzhí', loai: 'Phó từ', nghia: 'luôn luôn, mãi mãi' },
+                { word: '监督', pinyin: 'jiāndū', loai: 'Động từ/Danh từ', nghia: 'giám sát' },
+                { word: '老师', pinyin: 'lǎoshī', loai: 'Danh từ', nghia: 'thầy giáo, cô giáo' },
+                { word: '只是', pinyin: 'zhǐshì', loai: 'Phó từ', nghia: 'chỉ là' },
+                { word: '引路', pinyin: 'yǐnlù', loai: 'Động từ', nghia: 'dẫn đường' },
+                { word: '家长', pinyin: 'jiāzhǎng', loai: 'Danh từ', nghia: 'phụ huynh' },
+                { word: '后勤', pinyin: 'hòuqín', loai: 'Danh từ', nghia: 'hậu cần' },
+                { word: '漫漫', pinyin: 'mànmàn', loai: 'Tính từ', nghia: 'dài dài, mênh mông' },
+                { word: '求学', pinyin: 'qiúxué', loai: 'Động từ', nghia: 'học hành, đi học' },
+                { word: '自己', pinyin: 'zìjǐ', loai: 'Đại từ nhân xưng', nghia: 'bản thân, chính mình' },
+                { word: '主角', pinyin: 'zhǔjué', loai: 'Danh từ', nghia: 'nhân vật chính' },
+                { word: '唯有', pinyin: 'wéiyǒu', loai: 'Phó từ', nghia: 'chỉ có' },
+                { word: '努力', pinyin: 'nǔlì', loai: 'Động từ/Tính từ', nghia: 'cố gắng' },
+                { word: '才能', pinyin: 'cáinéng', loai: 'Phó từ', nghia: 'mới có thể' },
+                { word: '掌控', pinyin: 'zhǎngkòng', loai: 'Động từ', nghia: 'nắm giữ, kiểm soát' },
+                { word: '决定', pinyin: 'juédìng', loai: 'Động từ/Danh từ', nghia: 'quyết định' },
+                { word: '人生', pinyin: 'rénshēng', loai: 'Danh từ', nghia: 'cuộc đời, nhân sinh' },
+                { word: '帮助', pinyin: 'bāngzhù', loai: 'Động từ/Danh từ', nghia: 'giúp đỡ' },
+                { word: '走向', pinyin: 'zǒuxiàng', loai: 'Động từ', nghia: 'đi tới, hướng tới' },
+                { word: '优秀', pinyin: 'yōuxiù', loai: 'Tính từ', nghia: 'xuất sắc, giỏi' },
+                { word: '坚定', pinyin: 'jiāndìng', loai: 'Tính từ', nghia: 'kiên định, vững chắc' },
+                { word: '信念', pinyin: 'xìnniàn', loai: 'Danh từ', nghia: 'niềm tin, tín ngưỡng' },
+                { word: '目标', pinyin: 'mùbiāo', loai: 'Danh từ', nghia: 'mục tiêu, đích đến' },
+                { word: '不懈', pinyin: 'bùxiè', loai: 'Tính từ', nghia: 'không ngừng, kiên trì' },
+                { word: '坚持', pinyin: 'jiānchí', loai: 'Động từ/Danh từ', nghia: 'kiên trì, giữ vững' },
+                { word: '以及', pinyin: 'yǐjí', loai: 'Liên từ', nghia: 'cũng như, và' },
+                { word: '不断', pinyin: 'bùduàn', loai: 'Phó từ', nghia: 'liên tục, không ngừng' },
+                { word: '超越', pinyin: 'chāoyuè', loai: 'Động từ', nghia: 'vượt qua, vượt lên' },
+                { word: '自我', pinyin: 'zìwǒ', loai: 'Đại từ/Danh từ', nghia: 'bản thân, tự mình' },
+                { word: '决心', pinyin: 'juéxīn', loai: 'Danh từ', nghia: 'quyết tâm' },
+                { word: '毅力', pinyin: 'yìlì', loai: 'Danh từ', nghia: 'ý chí, sức bền' }
+            ],
+            pauseData: [{
+                zh: '没有人会一直监督，老师只是你的引路人，家长只是你的后勤保障。',
+                parts: ['没有人会', '一直监督，', '老师只是', '你的引路人，', '家长只是', '你的后勤保障。'],
+                vi: 'Không ai sẽ giám sát bạn mãi mãi. Giáo viên chỉ là người dẫn đường của bạn, còn phụ huynh chỉ là người đảm bảo hậu cần cho bạn.'
+            }, {
+                zh: '漫漫求学路，你自己才是主角。',
+                parts: ['漫漫求学路，', '你自己才是主角。'],
+                vi: 'Trên con đường dài học tập, chính bạn mới là nhân vật chính.'
+            }, {
+                zh: '唯有自己努力，才能掌控和决定自己的人生。',
+                parts: ['唯有自己努力，', '才能掌控和决定', '自己的人生。'],
+                vi: 'Chỉ có bản thân mình cố gắng, bạn mới có thể nắm giữ và quyết định cuộc đời của mình.'
+            }, {
+                zh: '能帮助你走向优秀的，只有你自己坚定的信念，对目标的不懈坚持，以及不断超越自我的决心和毅力。',
+                parts: ['能帮助你', '走向优秀的，', '只有你自己', '坚定的信念，', '对目标的', '不懈坚持，', '以及不断超越自我的', '决心和毅力。'],
+                vi: 'Điều duy nhất có thể giúp bạn trở nên xuất sắc chính là niềm tin kiên định của bản thân, sự kiên trì không ngừng với mục tiêu, cũng như quyết tâm và ý chí không ngừng vượt qua chính mình.'
+            }]
+        }, {
+            id: 'shijian',
+            title: '时间不会辜负努力的人',
+            subtitle: 'Thời gian không phụ lòng người nỗ lực',
+            icon: '⏳',
+            chinese: '你只管努力，时间会给你答案。不要因为进步慢就灰心，不要因为暂时没有结果就放弃。学习就像种下一棵小树苗，需要慢慢浇水、细心施肥，才能长成参天大树。你只管认真听课，好好写作业，遇到难题不退缩，失败了就重新站起来。时间不会辜负每一个努力的人，你付出的每一滴汗水，都会变成未来送给你的珍贵礼物。',
+            vietnamese: 'Bạn cứ nỗ lực đi, thời gian sẽ cho bạn câu trả lời. Đừng nản lòng vì tiến bộ chậm, đừng từ bỏ vì tạm thời chưa có kết quả. Học tập cũng giống như trồng một cây non, cần phải tưới nước từ từ, bón phân cẩn thận, thì mới có thể trở thành cây đại thụ. Bạn chỉ cần chăm chú nghe giảng, làm bài tập đầy đủ, không lùi bước trước khó khăn, thất bại rồi lại đứng lên. Thời gian sẽ không phụ lòng những ai đã nỗ lực. Từng giọt mồ hôi bạn đổ ra sẽ đều trở thành món quà quý giá mà tương lai dành tặng cho bạn.',
+            vocabulary: [
+                { word: '努力', pinyin: 'nǔ lì', loai: 'động từ / danh từ', nghia: 'cố gắng; sự nỗ lực, sự cố gắng' },
+                { word: '时间', pinyin: 'shí jiān', loai: 'danh từ', nghia: 'thời gian' },
+                { word: '答案', pinyin: 'dá àn', loai: 'danh từ', nghia: 'đáp án, câu trả lời' },
+                { word: '只管', pinyin: 'zhǐ guǎn', loai: 'phó từ', nghia: 'cứ việc, chỉ cần tập trung làm việc gì mà không cần lo lắng thêm' },
+                { word: '因为', pinyin: 'yīn wèi', loai: 'liên từ / giới từ', nghia: 'bởi vì, do (chỉ nguyên nhân)' },
+                { word: '进步', pinyin: 'jìn bù', loai: 'động từ / danh từ', nghia: 'tiến bộ; sự tiến bộ, sự phát triển tốt hơn' },
+                { word: '灰心', pinyin: 'huī xīn', loai: 'động từ / tính từ', nghia: 'chán nản, mất tinh thần, mất lòng tin vào bản thân' },
+                { word: '暂时', pinyin: 'zàn shí', loai: 'phó từ / tính từ', nghia: 'tạm thời; trong khoảng thời gian ngắn hạn' },
+                { word: '结果', pinyin: 'jié guǒ', loai: 'danh từ', nghia: 'kết quả, thành quả cuối cùng' },
+                { word: '放弃', pinyin: 'fàng qì', loai: 'động từ', nghia: 'từ bỏ, buông bỏ, không tiếp tục nữa' },
+                { word: '学习', pinyin: 'xué xí', loai: 'động từ / danh từ', nghia: 'học tập; sự học tập, nghiên cứu kiến thức' },
+                { word: '树苗', pinyin: 'shù miáo', loai: 'danh từ', nghia: 'cây non, cây giống còn nhỏ' },
+                { word: '需要', pinyin: 'xū yào', loai: 'động từ / danh từ', nghia: 'cần, đòi hỏi; sự cần thiết, nhu cầu' },
+                { word: '慢慢', pinyin: 'màn màn', loai: 'phó từ', nghia: 'từ từ, chậm rãi, không vội vàng' },
+                { word: '浇水', pinyin: 'jiāo shuǐ', loai: 'động từ', nghia: 'tưới nước, rưới nước cho cây trồng' },
+                { word: '细心', pinyin: 'xì xīn', loai: 'tính từ / phó từ', nghia: 'tỉ mỉ, cẩn thận, chu đáo từng chi tiết' },
+                { word: '施肥', pinyin: 'shī féi', loai: 'động từ', nghia: 'bón phân, cung cấp dưỡng chất cho cây' },
+                { word: '才能', pinyin: 'cái néng', loai: 'phó từ', nghia: 'mới có thể, mới đủ khả năng làm được gì' },
+                { word: '长成', pinyin: 'zhǎng chéng', loai: 'động từ', nghia: 'lớn lên thành, phát triển thành hình thái hoàn chỉnh' },
+                { word: '认真', pinyin: 'rèn zhēn', loai: 'tính từ / phó từ', nghia: 'nghiêm túc, cẩn thận, tâm huyết với công việc' },
+                { word: '听课', pinyin: 'tīng kè', loai: 'động từ', nghia: 'nghe bài giảng, tham gia học tập trên lớp' },
+                { word: '好好', pinyin: 'hǎo hǎo', loai: 'phó từ', nghia: 'một cách chu đáo, nghiêm túc, tốt đẹp' },
+                { word: '作业', pinyin: 'zuò yè', loai: 'danh từ', nghia: 'bài tập về nhà, bài tập học sinh cần hoàn thành' },
+                { word: '遇到', pinyin: 'yù dào', loai: 'động từ', nghia: 'gặp phải, đương đầu với tình huống nào đó' },
+                { word: '难题', pinyin: 'nán tí', loai: 'danh từ', nghia: 'câu hỏi khó, vấn đề khó giải quyết' },
+                { word: '退缩', pinyin: 'tuì suō', loai: 'động từ', nghia: 'rụt lui, nao núng, không dám đối mặt thử thách' },
+                { word: '失败', pinyin: 'shī bài', loai: 'động từ / danh từ', nghia: 'thất bại; sự thất bại, không đạt được mục tiêu' },
+                { word: '重新', pinyin: 'chóng xīn', loai: 'phó từ', nghia: 'lại lần nữa, bắt đầu lại từ đầu' },
+                { word: '起来', pinyin: 'qǐ lái', loai: 'động từ xu hướng', nghia: 'đứng dậy; lên (bổ nghĩa hướng hành động cho động từ đứng trước)' },
+                { word: '辜负', pinyin: 'gū fù', loai: 'động từ', nghia: 'làm thất vọng, không xứng đáng với lòng tin hay công sức của ai' },
+                { word: '付出', pinyin: 'fù chū', loai: 'động từ / danh từ', nghia: 'dành ra, cống hiến; sự đóng góp sức lực, thời gian' },
+                { word: '汗水', pinyin: 'hàn shuǐ', loai: 'danh từ', nghia: 'mồ hôi; (nghĩa bóng) sự vất vả, cố gắng' },
+                { word: '变成', pinyin: 'biàn chéng', loai: 'động từ', nghia: 'trở thành, hóa thành hình thái khác' },
+                { word: '未来', pinyin: 'wèi lái', loai: 'danh từ / tính từ', nghia: 'tương lai; thời gian sắp tới' },
+                { word: '送给', pinyin: 'sòng gěi', loai: 'động từ', nghia: 'tặng cho, trao tặng cho ai đó' },
+                { word: '珍贵', pinyin: 'zhēn guì', loai: 'tính từ', nghia: 'quý giá, đáng trân trọng, có giá trị cao' },
+                { word: '礼物', pinyin: 'lǐ wù', loai: 'danh từ', nghia: 'món quà, quà tặng' },
+                { word: '参天大树', pinyin: 'cān tiān dà shù', loai: 'cụm tứ tự (danh từ)', nghia: 'cây lớn vươn cao tới trời, cây cổ thụ to lớn vững chãi' }
+            ],
+            pauseData: [{
+                zh: '你只管努力，时间会给你答案。',
+                parts: ['你只管努力，', '时间会给你答案。'],
+                vi: 'Bạn cứ nỗ lực đi, thời gian sẽ cho bạn câu trả lời.'
+            }, {
+                zh: '不要因为进步慢就灰心，不要因为暂时没有结果就放弃。',
+                parts: ['不要因为', '进步慢就灰心，', '不要因为', '暂时没有结果就放弃。'],
+                vi: 'Đừng nản lòng vì tiến bộ chậm, đừng từ bỏ vì tạm thời chưa có kết quả.'
+            }, {
+                zh: '学习就像种下一棵小树苗，需要慢慢浇水、细心施肥，才能长成参天大树。',
+                parts: ['学习就像', '种下一棵小树苗，', '需要慢慢浇水、', '细心施肥，', '才能长成', '参天大树。'],
+                vi: 'Học tập cũng giống như trồng một cây non, cần phải tưới nước từ từ, bón phân cẩn thận, thì mới có thể trở thành cây đại thụ.'
+            }, {
+                zh: '你只管认真听课，好好写作业，遇到难题不退缩，失败了就重新站起来。',
+                parts: ['你只管', '认真听课，', '好好写作业，', '遇到难题不退缩，', '失败了就', '重新站起来。'],
+                vi: 'Bạn chỉ cần chăm chú nghe giảng, làm bài tập đầy đủ, không lùi bước trước khó khăn, thất bại rồi lại đứng lên.'
+            }, {
+                zh: '时间不会辜负每一个努力的人，你付出的每一滴汗水，都会变成未来送给你的珍贵礼物。',
+                parts: ['时间不会辜负', '每一个努力的人，', '你付出的', '每一滴汗水，', '都会变成', '未来送给你的', '珍贵礼物。'],
+                vi: 'Thời gian sẽ không phụ lòng những ai đã nỗ lực. Từng giọt mồ hôi bạn đổ ra sẽ đều trở thành món quà quý giá mà tương lai dành tặng cho bạn.'
+            }]
+        }, {
+            id: 'mama',
+            title: '向妈妈告白',
+            subtitle: 'Lời tâm sự gửi mẹ',
+            icon: '💕',
+            chinese: '我认识妈妈的时候，她才二十几岁。我猜想：妈妈第一次见到我的时候，一定是她这辈子最美的时候。只是那时候的我，一定在不停地哭，所以忘了看妈妈最美的样子。我以一声妈妈为理由，向你索要一切，而你以一声妈妈为枷锁，向我毫无保留地付出所有。可是，我却忘了，妈妈也是第一次当妈妈，妈妈也是别人的女儿，却因为我的出现，不得不成为无所不能的女超人。你不是完美的妈妈，我也不是没有缺点的孩子，但我们都真的很爱很爱对方。她也只是个长大了的小女孩。母亲节快乐，愿妈妈在未来的日子里平安健康！',
+            vietnamese: 'Lúc con mới quen biết mẹ, mẹ mới hai mươi mấy tuổi. Con đoán rằng: lần đầu tiên mẹ gặp con, chắc hẳn chính là lúc mẹ đẹp nhất trong cả đời mình. Chỉ là lúc đó con chắc hẳn đã khóc không ngừng, nên đã quên nhìn thấy vẻ đẹp nhất của mẹ. Con lấy tiếng gọi "mẹ" làm lý do, đòi hỏi mẹ tất cả mọi thứ; còn mẹ lại lấy tiếng gọi "mẹ" làm ách nợ, dành cho con trọn vẹn tất cả không giữ lại chút nào. Nhưng con lại quên: mẹ cũng là lần đầu tiên làm mẹ, mẹ cũng là con gái của người khác, chỉ vì sự xuất hiện của con, mẹ buộc phải trở thành siêu nhân nữ vạn năng. Mẹ không phải là người mẹ hoàn hảo, con cũng không phải là đứa trẻ không có khuyết điểm, nhưng chúng ta đều thật sự rất yêu thương nhau. Mẹ cũng chỉ là một cô gái đã lớn lên thôi. Chúc mừng Ngày của mẹ! Ước mong mẹ trong những ngày tháng tương lai luôn bình an và khỏe mạnh.',
+            vocabulary: [
+                { word: '告白', pinyin: 'gào bái', loai: 'động từ / danh từ', nghia: 'bày tỏ tình cảm; lời bày tỏ lòng yêu thương và tâm sự' },
+                { word: '认识', pinyin: 'rèn shi', loai: 'động từ', nghia: 'quen biết, nhận biết, làm quen với ai đó' },
+                { word: '妈妈', pinyin: 'mā ma', loai: 'danh từ', nghia: 'mẹ (gọi thân mật, thường dùng trong giao tiếp hàng ngày)' },
+                { word: '时候', pinyin: 'shí hou', loai: 'danh từ', nghia: 'lúc, thời điểm, khoảng thời gian' },
+                { word: '二十', pinyin: 'èr shí', loai: 'số từ', nghia: 'hai mươi' },
+                { word: '猜想', pinyin: 'cāi xiǎng', loai: 'động từ / danh từ', nghia: 'đoán, phỏng đoán; sự suy nghĩ tưởng tượng' },
+                { word: '第一', pinyin: 'dì yī', loai: 'số thứ tự', nghia: 'thứ nhất, đầu tiên' },
+                { word: '见到', pinyin: 'jiàn dào', loai: 'động từ', nghia: 'gặp, nhìn thấy, được tiếp xúc' },
+                { word: '一定', pinyin: 'yī dìng', loai: 'phó từ', nghia: 'chắc chắn, hẳn là; nhất định' },
+                { word: '辈子', pinyin: 'bèi zi', loai: 'danh từ', nghia: 'đời, kiếp, khoảng thời gian cả cuộc đời' },
+                { word: '只是', pinyin: 'zhǐ shì', loai: 'phó từ / liên từ', nghia: 'chỉ là; nhưng mà, tuy nhiên' },
+                { word: '不停', pinyin: 'bù tíng', loai: 'phó từ / tính từ', nghia: 'không ngừng, liên tục, không dừng lại' },
+                { word: '所以', pinyin: 'suǒ yǐ', loai: 'liên từ', nghia: 'vì vậy, cho nên, do đó' },
+                { word: '样子', pinyin: 'yàng zi', loai: 'danh từ', nghia: 'vẻ ngoài, dáng vẻ, hình dáng, phong thái' },
+                { word: '一声', pinyin: 'yī shēng', loai: 'số lượng từ', nghia: 'một tiếng, một lời' },
+                { word: '理由', pinyin: 'lǐ yóu', loai: 'danh từ', nghia: 'lý do, căn cứ, lý lẽ' },
+                { word: '索要', pinyin: 'suǒ yào', loai: 'động từ', nghia: 'đòi hỏi, đòi lấy, yêu cầu được cái gì' },
+                { word: '一切', pinyin: 'yī qiè', loai: 'đại từ / danh từ', nghia: 'tất cả, mọi thứ, toàn bộ' },
+                { word: '枷锁', pinyin: 'jiā suǒ', loai: 'danh từ', nghia: 'ách nợ; sự ràng buộc, gánh nặng (nghĩa bóng)' },
+                { word: '毫无', pinyin: 'háo wú', loai: 'phó từ', nghia: 'hoàn toàn không, chẳng có chút nào' },
+                { word: '保留', pinyin: 'bǎo liú', loai: 'động từ', nghia: 'giữ lại, bảo lưu, không đưa ra hết' },
+                { word: '付出', pinyin: 'fù chū', loai: 'động từ / danh từ', nghia: 'dành ra, cống hiến; sự đóng góp sức lực, tình cảm' },
+                { word: '所有', pinyin: 'suǒ yǒu', loai: 'đại từ / tính từ', nghia: 'tất cả, toàn bộ, mọi cái' },
+                { word: '可是', pinyin: 'kě shì', loai: 'liên từ', nghia: 'nhưng, tuy nhiên' },
+                { word: '女儿', pinyin: 'nǚ ér', loai: 'danh từ', nghia: 'con gái' },
+                { word: '因为', pinyin: 'yīn wèi', loai: 'liên từ / giới từ', nghia: 'bởi vì, do, vì' },
+                { word: '出现', pinyin: 'chū xiàn', loai: 'động từ / danh từ', nghia: 'xuất hiện; sự xuất hiện, sự hiện diện' },
+                { word: '不得', pinyin: 'bù dé', loai: 'động từ / phó từ', nghia: 'không được, không thể; không phép' },
+                { word: '成为', pinyin: 'chéng wéi', loai: 'động từ', nghia: 'trở thành, hóa thành' },
+                { word: '超人', pinyin: 'chāo rén', loai: 'danh từ', nghia: 'siêu nhân; người có năng lực vượt trội' },
+                { word: '完美', pinyin: 'wán měi', loai: 'tính từ', nghia: 'hoàn hảo, không có khuyết điểm' },
+                { word: '缺点', pinyin: 'quē diǎn', loai: 'danh từ', nghia: 'khuyết điểm, điểm yếu, chỗ chưa tốt' },
+                { word: '孩子', pinyin: 'hái zi', loai: 'danh từ', nghia: 'con cái; đứa trẻ, người còn nhỏ' },
+                { word: '我们', pinyin: 'wǒ men', loai: 'đại từ nhân xưng', nghia: 'chúng ta, chúng tôi' },
+                { word: '真的', pinyin: 'zhēn de', loai: 'phó từ / tính từ', nghia: 'thực sự, thật sự; đúng, có thật' },
+                { word: '对方', pinyin: 'duì fāng', loai: 'danh từ', nghia: 'đối phương, người bên kia, người đối diện' },
+                { word: '长大', pinyin: 'zhǎng dà', loai: 'động từ', nghia: 'lớn lên, trưởng thành về tuổi tác và tâm lý' },
+                { word: '女孩', pinyin: 'nǚ hái', loai: 'danh từ', nghia: 'cô gái, bé gái' },
+                { word: '母亲', pinyin: 'mǔ qīn', loai: 'danh từ', nghia: 'mẹ (gọi trang trọng, dùng trong văn bản và ngày lễ)' },
+                { word: '节日', pinyin: 'jié rì', loai: 'danh từ', nghia: 'ngày lễ, dịp lễ kỷ niệm' },
+                { word: '快乐', pinyin: 'kuài lè', loai: 'tính từ / cảm thán từ', nghia: 'vui vẻ, hạnh phúc; dùng chúc mừng' },
+                { word: '未来', pinyin: 'wèi lái', loai: 'danh từ / tính từ', nghia: 'tương lai; thời gian sắp tới' },
+                { word: '日子', pinyin: 'rì zi', loai: 'danh từ', nghia: 'ngày tháng, cuộc sống, khoảng thời gian' },
+                { word: '平安', pinyin: 'píng ān', loai: 'tính từ', nghia: 'bình an, an lành, không gặp rủi ro' },
+                { word: '健康', pinyin: 'jiàn kāng', loai: 'tính từ / danh từ', nghia: 'khỏe mạnh; sức khỏe tốt' },
+                { word: '无所不能', pinyin: 'wú suǒ bù néng', loai: 'thành ngữ', nghia: 'không việc gì không làm được; có năng lực vạn năng, làm được mọi thứ' },
+                { word: '向', pinyin: 'xiàng', loai: 'giới từ', nghia: 'hướng về, dành cho, đối với' },
+                { word: '我', pinyin: 'wǒ', loai: 'đại từ nhân xưng', nghia: 'tôi, tớ (xưng hô thứ nhất)' },
+                { word: '她', pinyin: 'tā', loai: 'đại từ nhân xưng', nghia: 'cô ấy, bà ấy (chỉ người nữ)' },
+                { word: '才', pinyin: 'cái', loai: 'phó từ', nghia: 'mới, vừa mới; chỉ, mới chỉ (nhấn số lượng ít)' },
+                { word: '几', pinyin: 'jǐ', loai: 'số từ', nghia: 'mấy, bao nhiêu (chỉ số lượng không nhiều)' },
+                { word: '岁', pinyin: 'suì', loai: 'lượng từ / danh từ', nghia: 'tuổi (đơn vị đếm số tuổi)' },
+                { word: '次', pinyin: 'cì', loai: 'lượng từ', nghia: 'lần (đơn vị đếm số lần lặp lại hành động)' },
+                { word: '是', pinyin: 'shì', loai: 'động từ phán đoán', nghia: 'là' },
+                { word: '这', pinyin: 'zhè', loai: 'đại từ chỉ định', nghia: 'này, đây' },
+                { word: '最', pinyin: 'zuì', loai: 'phó từ', nghia: 'nhất (chỉ mức độ cao nhất)' },
+                { word: '美', pinyin: 'měi', loai: 'tính từ', nghia: 'đẹp, tốt đẹp' },
+                { word: '只', pinyin: 'zhǐ', loai: 'phó từ', nghia: 'chỉ, duy nhất' },
+                { word: '那', pinyin: 'nà', loai: 'đại từ chỉ định', nghia: 'đó, kia' },
+                { word: '在', pinyin: 'zài', loai: 'giới từ / động từ / phó từ', nghia: 'ở; đang; trong (chỉ thời gian, địa điểm)' },
+                { word: '地', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'dùng sau tính từ/tính trạng từ, bổ nghĩa cho động từ theo sau' },
+                { word: '哭', pinyin: 'kū', loai: 'động từ', nghia: 'khóc' },
+                { word: '忘', pinyin: 'wàng', loai: 'động từ', nghia: 'quên, không nhớ' },
+                { word: '看', pinyin: 'kàn', loai: 'động từ', nghia: 'nhìn, xem, ngắm' },
+                { word: '以', pinyin: 'yǐ', loai: 'giới từ', nghia: 'dùng, lấy, dựa vào' },
+                { word: '声', pinyin: 'shēng', loai: 'lượng từ / danh từ', nghia: 'tiếng; âm thanh' },
+                { word: '为', pinyin: 'wéi', loai: 'động từ / giới từ', nghia: 'làm, trở thành; vì' },
+                { word: '你', pinyin: 'nǐ', loai: 'đại từ nhân xưng', nghia: 'bạn, mẹ (xưng hô thứ hai, thân mật)' },
+                { word: '而', pinyin: 'ér', loai: 'liên từ', nghia: 'mà, nhưng, đồng thời' },
+                { word: '无', pinyin: 'wú', loai: 'động từ', nghia: 'không có, vô' },
+                { word: '所', pinyin: 'suǒ', loai: 'trợ từ', nghia: 'dùng trước động từ, tạo thành cấu trúc mang nghĩa danh từ' },
+                { word: '可', pinyin: 'kě', loai: 'liên từ / động từ', nghia: 'nhưng; có thể' },
+                { word: '却', pinyin: 'què', loai: 'phó từ / liên từ', nghia: 'nhưng, lại, trái ngược' },
+                { word: '也', pinyin: 'yě', loai: 'phó từ', nghia: 'cũng' },
+                { word: '当', pinyin: 'dāng', loai: 'động từ', nghia: 'làm, đảm nhận vị trí; khi' },
+                { word: '别', pinyin: 'bié', loai: 'tính từ', nghia: 'khác, 别的' },
+                { word: '人', pinyin: 'rén', loai: 'danh từ', nghia: 'người' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ', nghia: 'không (dùng phủ định)' },
+                { word: '得', pinyin: 'dé', loai: 'trợ từ / động từ', nghia: 'được; dùng sau động từ chỉ khả năng hay kết quả' },
+                { word: '成', pinyin: 'chéng', loai: 'động từ', nghia: 'thành, hoàn thành; trở thành' },
+                { word: '能', pinyin: 'néng', loai: 'động từ', nghia: 'có thể, có khả năng làm gì' },
+                { word: '女', pinyin: 'nǚ', loai: 'tính từ', nghia: 'nữ, thuộc giới tính nữ' },
+                { word: '没', pinyin: 'méi', loai: 'phó từ', nghia: 'không có, chưa' },
+                { word: '有', pinyin: 'yǒu', loai: 'động từ', nghia: 'có, tồn tại' },
+                { word: '但', pinyin: 'dàn', loai: 'liên từ', nghia: 'nhưng' },
+                { word: '都', pinyin: 'dōu', loai: 'phó từ', nghia: 'đều, tất cả' },
+                { word: '很', pinyin: 'hěn', loai: 'phó từ', nghia: 'rất, cực kỳ (chỉ mức độ)' },
+                { word: '爱', pinyin: 'ài', loai: 'động từ / danh từ', nghia: 'yêu thương; tình yêu' },
+                { word: '方', pinyin: 'fāng', loai: 'danh từ', nghia: 'phía, bên, phương diện' },
+                { word: '个', pinyin: 'gè', loai: 'lượng từ', nghia: 'cái, người (đơn vị đếm người hay vật thông thường)' },
+                { word: '了', pinyin: 'le', loai: 'trợ từ thì', nghia: 'dùng chỉ hành động đã hoàn thành hoặc trạng thái đã thay đổi' },
+                { word: '小', pinyin: 'xiǎo', loai: 'tính từ', nghia: 'nhỏ, bé' },
+                { word: '孩', pinyin: 'hái', loai: 'danh từ', nghia: 'trẻ em, con cái' },
+                { word: '节', pinyin: 'jié', loai: 'danh từ', nghia: 'lễ, kỳ, tiết' },
+                { word: '愿', pinyin: 'yuàn', loai: 'động từ', nghia: 'ước mong, chúc, mong muốn' },
+                { word: '里', pinyin: 'lǐ', loai: 'danh từ / trợ từ', nghia: 'trong, bên trong' }
+            ],
+            pauseData: [{
+                zh: '我认识妈妈的时候，她才二十几岁。',
+                parts: ['我认识妈妈的时候，', '她才二十几岁。'],
+                vi: 'Lúc con mới quen biết mẹ, mẹ mới hai mươi mấy tuổi.'
+            }, {
+                zh: '我猜想：妈妈第一次见到我的时候，一定是她这辈子最美的时候。',
+                parts: ['我猜想：', '妈妈第一次', '见到我的时候，', '一定是她', '这辈子最美的时候。'],
+                vi: 'Con đoán rằng: lần đầu tiên mẹ gặp con, chắc hẳn chính là lúc mẹ đẹp nhất trong cả đời mình.'
+            }, {
+                zh: '只是那时候的我，一定在不停地哭，所以忘了看妈妈最美的样子。',
+                parts: ['只是那时候的我，', '一定在不停地哭，', '所以忘了看', '妈妈最美的样子。'],
+                vi: 'Chỉ là lúc đó con chắc hẳn đã khóc không ngừng, nên đã quên nhìn thấy vẻ đẹp nhất của mẹ.'
+            }, {
+                zh: '我以一声妈妈为理由，向你索要一切，而你以一声妈妈为枷锁，向我毫无保留地付出所有。',
+                parts: ['我以一声妈妈', '为理由，', '向你索要一切，', '而你以一声妈妈', '为枷锁，', '向我毫无保留地', '付出所有。'],
+                vi: 'Con lấy tiếng gọi "mẹ" làm lý do, đòi hỏi mẹ tất cả mọi thứ; còn mẹ lại lấy tiếng gọi "mẹ" làm ách nợ, dành cho con trọn vẹn tất cả không giữ lại chút nào.'
+            }, {
+                zh: '可是，我却忘了，妈妈也是第一次当妈妈，妈妈也是别人的女儿，却因为我的出现，不得不成为无所不能的女超人。',
+                parts: ['可是，', '我却忘了，', '妈妈也是', '第一次当妈妈，', '妈妈也是', '别人的女儿，', '却因为我的出现，', '不得不成为', '无所不能的女超人。'],
+                vi: 'Nhưng con lại quên: mẹ cũng là lần đầu tiên làm mẹ, mẹ cũng là con gái của người khác, chỉ vì sự xuất hiện của con, mẹ buộc phải trở thành siêu nhân nữ vạn năng.'
+            }, {
+                zh: '你不是完美的妈妈，我也不是没有缺点的孩子，但我们都真的很爱很爱对方。',
+                parts: ['你不是', '完美的妈妈，', '我也不是', '没有缺点的孩子，', '但我们都', '真的很爱很爱对方。'],
+                vi: 'Mẹ không phải là người mẹ hoàn hảo, con cũng không phải là đứa trẻ không có khuyết điểm, nhưng chúng ta đều thật sự rất yêu thương nhau.'
+            }, {
+                zh: '她也只是个长大了的小女孩。母亲节快乐，愿妈妈在未来的日子里平安健康！',
+                parts: ['她也只是', '个长大了的', '小女孩。', '母亲节快乐，', '愿妈妈在未来的', '日子里平安健康！'],
+                vi: 'Mẹ cũng chỉ là một cô gái đã lớn lên thôi. Chúc mừng Ngày của mẹ! Ước mong mẹ trong những ngày tháng tương lai luôn bình an và khỏe mạnh.'
+            }]
+        }, {
+            id: 'yonggan',
+            title: '勇敢站起来',
+            subtitle: 'Hãy dũng cảm đứng dậy',
+            icon: '💪',
+            chinese: '摔倒了并不可怕，可怕的是失去了勇敢站起来的勇气。你要记住，小小的蚂蚁，都能搬动比自己还大的食物。你比蚂蚁勇敢，也比蚂蚁强大得多，一定可以做到更好，成为更棒的自己！',
+            vietnamese: 'Vấp ngã không hề đáng sợ, điều đáng sợ chính là mất đi can đảm để đứng dậy một cách dũng cảm. Hãy ghi nhớ: những con kiến nhỏ bé cũng có thể vác được thức ăn to lớn hơn chính bản thân chúng. Bạn dũng cảm hơn con kiến, cũng mạnh mẽ hơn chúng rất nhiều, chắc chắn có thể làm tốt hơn, trở thành phiên bản tuyệt vời hơn của chính mình!',
+            vocabulary: [
+                { word: '摔倒', pinyin: 'shuāi dǎo', loai: 'động từ', nghia: 'vấp ngã, té xuống; (nghĩa bóng) gặp thất bại' },
+                { word: '可怕', pinyin: 'kě pà', loai: 'tính từ', nghia: 'đáng sợ, khiến người ta cảm thấy hãi hùng' },
+                { word: '失去', pinyin: 'shī qù', loai: 'động từ', nghia: 'mất đi, không còn giữ được nữa' },
+                { word: '勇敢', pinyin: 'yǒng gǎn', loai: 'tính từ', nghia: 'dũng cảm, mạnh dạn, không sợ đối mặt khó khăn' },
+                { word: '起来', pinyin: 'qǐ lái', loai: 'động từ xu hướng', nghia: 'đứng dậy; lên (dùng sau động từ chỉ hướng hành động)' },
+                { word: '勇气', pinyin: 'yǒng qì', loai: 'danh từ', nghia: 'lòng can đảm, tinh thần dám đối mặt thử thách' },
+                { word: '记住', pinyin: 'jì zhù', loai: 'động từ', nghia: 'ghi nhớ, nhớ kỹ, không quên' },
+                { word: '蚂蚁', pinyin: 'mǎ yǐ', loai: 'danh từ', nghia: 'con kiến' },
+                { word: '搬动', pinyin: 'bān dòng', loai: 'động từ', nghia: 'nâng vác, di chuyển đồ vật đi nơi khác' },
+                { word: '自己', pinyin: 'zì jǐ', loai: 'đại từ', nghia: 'bản thân, tự mình' },
+                { word: '食物', pinyin: 'shí wù', loai: 'danh từ', nghia: 'thức ăn, đồ ăn' },
+                { word: '强大', pinyin: 'qiáng dà', loai: 'tính từ', nghia: 'mạnh mẽ, có sức mạnh và năng lực lớn' },
+                { word: '一定', pinyin: 'yī dìng', loai: 'phó từ', nghia: 'chắc chắn, hẳn là; nhất định' },
+                { word: '可以', pinyin: 'kě yǐ', loai: 'trợ động từ', nghia: 'có thể, có khả năng; được phép' },
+                { word: '做到', pinyin: 'zuò dào', loai: 'động từ', nghia: 'làm được, thực hiện thành công mục tiêu' },
+                { word: '成为', pinyin: 'chéng wéi', loai: 'động từ', nghia: 'trở thành, hóa thành' },
+                { word: '并', pinyin: 'bìng', loai: 'phó từ', nghia: 'hoàn toàn, hề (dùng trong cấu trúc phủ định nhấn mạnh)' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ phủ định', nghia: 'không' },
+                { word: '了', pinyin: 'le', loai: 'trợ từ thì', nghia: 'dùng chỉ hành động đã hoàn thành hoặc trạng thái đã thay đổi' },
+                { word: '的', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'của; dùng tạo cấu trúc định ngữ bổ nghĩa danh từ' },
+                { word: '是', pinyin: 'shì', loai: 'động từ phán đoán', nghia: 'là' },
+                { word: '你', pinyin: 'nǐ', loai: 'đại từ nhân xưng', nghia: 'bạn, cậu' },
+                { word: '要', pinyin: 'yào', loai: 'trợ động từ', nghia: 'phải, cần; muốn, định làm gì' },
+                { word: '小', pinyin: 'xiǎo', loai: 'tính từ', nghia: 'nhỏ, bé' },
+                { word: '都', pinyin: 'dōu', loai: 'phó từ', nghia: 'đều, tất cả' },
+                { word: '能', pinyin: 'néng', loai: 'trợ động từ', nghia: 'có thể, có khả năng làm gì' },
+                { word: '站', pinyin: 'zhàn', loai: 'động từ', nghia: 'đứng' },
+                { word: '比', pinyin: 'bǐ', loai: 'giới từ', nghia: 'so với, hơn (dùng trong cấu trúc so sánh)' },
+                { word: '还', pinyin: 'hái', loai: 'phó từ', nghia: 'vẫn, còn; thậm chí còn' },
+                { word: '大', pinyin: 'dà', loai: 'tính từ', nghia: 'lớn, to' },
+                { word: '也', pinyin: 'yě', loai: 'phó từ', nghia: 'cũng' },
+                { word: '得', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'dùng sau động từ/tính từ chỉ mức độ hay kết quả' },
+                { word: '多', pinyin: 'duō', loai: 'phó từ / tính từ', nghia: 'nhiều; rất, cực kỳ (chỉ mức độ)' },
+                { word: '更', pinyin: 'gèng', loai: 'phó từ', nghia: 'hơn, càng (chỉ mức độ tăng thêm)' },
+                { word: '好', pinyin: 'hǎo', loai: 'tính từ', nghia: 'tốt, hay, đạt chất lượng cao' },
+                { word: '棒', pinyin: 'bàng', loai: 'tính từ', nghia: 'tuyệt vời, giỏi, xuất sắc (giọng văn thân mật khẩu ngữ)' }
+            ],
+            pauseData: [{
+                zh: '摔倒了并不可怕，可怕的是失去了勇敢站起来的勇气。',
+                parts: ['摔倒了', '并不可怕，', '可怕的是', '失去了', '勇敢站起来的勇气。'],
+                vi: 'Vấp ngã không hề đáng sợ, điều đáng sợ chính là mất đi can đảm để đứng dậy một cách dũng cảm.'
+            }, {
+                zh: '你要记住，小小的蚂蚁，都能搬动比自己还大的食物。',
+                parts: ['你要记住，', '小小的蚂蚁，', '都能搬动', '比自己还大的食物。'],
+                vi: 'Hãy ghi nhớ: những con kiến nhỏ bé cũng có thể vác được thức ăn to lớn hơn chính bản thân chúng.'
+            }, {
+                zh: '你比蚂蚁勇敢，也比蚂蚁强大得多，一定可以做到更好，成为更棒的自己！',
+                parts: ['你比蚂蚁勇敢，', '也比蚂蚁', '强大得多，', '一定可以', '做到更好，', '成为更棒的自己！'],
+                vi: 'Bạn dũng cảm hơn con kiến, cũng mạnh mẽ hơn chúng rất nhiều, chắc chắn có thể làm tốt hơn, trở thành phiên bản tuyệt vời hơn của chính mình!'
+            }]
+        }, {
+            id: 'zhanfang',
+            title: '绽放属于自己的光',
+            subtitle: 'Tỏa sáng với ánh sáng của riêng mình',
+            icon: '✨',
+            chinese: '当你选择追赶别人，就容易弄丢自己的方向，只有把注意力放在自己身上，才能绽放属于自己的光，人生真正该超越的从来不是别人，而是那个想放弃、想退缩、想松懈的自己。',
+            vietnamese: 'Khi bạn chọn đuổi theo người khác, bạn dễ đánh mất phương hướng của chính mình. Chỉ khi đặt sự tập trung vào bản thân, bạn mới có thể tỏa sáng với ánh sáng của riêng mình. Điều con người thực sự cần vượt qua trong cuộc đời không phải là người khác, mà chính là bản thân -- kẻ muốn từ bỏ, muốn lùi bước, muốn chùng lòng.',
+            vocabulary: [
+                { word: '选择', pinyin: 'xuǎn zé', loai: 'động từ / danh từ', nghia: 'lựa chọn; sự lựa chọn, quyết định hướng đi' },
+                { word: '追赶', pinyin: 'zhuī gǎn', loai: 'động từ', nghia: 'đuổi theo; (nghĩa bóng) cố gắng bắt kịp người khác' },
+                { word: '别人', pinyin: 'bié rén', loai: 'đại từ / danh từ', nghia: 'người khác, người bên ngoài' },
+                { word: '容易', pinyin: 'róng yì', loai: 'tính từ', nghia: 'dễ dàng, không gặp nhiều trở ngại' },
+                { word: '弄丢', pinyin: 'nòng diū', loai: 'động từ', nghia: 'làm mất, đánh mất, không còn giữ được' },
+                { word: '自己', pinyin: 'zì jǐ', loai: 'đại từ', nghia: 'bản thân, tự mình' },
+                { word: '方向', pinyin: 'fāng xiàng', loai: 'danh từ', nghia: 'phương hướng, hướng đi, định hướng phát triển' },
+                { word: '只有', pinyin: 'zhǐ yǒu', loai: 'liên từ', nghia: 'chỉ có, chỉ khi (dùng chỉ điều kiện cần thiết)' },
+                { word: '注意', pinyin: 'zhù yì', loai: 'động từ / danh từ', nghia: 'chú ý; sự tập trung tinh thần vào đối tượng nào đó' },
+                { word: '身上', pinyin: 'shēn shàng', loai: 'danh từ', nghia: 'trên người; về bản thân, trong phạm vi cá nhân' },
+                { word: '才能', pinyin: 'cái néng', loai: 'phó từ', nghia: 'mới có thể, mới đủ khả năng thực hiện điều gì' },
+                { word: '绽放', pinyin: 'zhàn fàng', loai: 'động từ', nghia: 'nở rộ (hoa); (nghĩa bóng) tỏa sáng, thể hiện hết tiềm năng' },
+                { word: '属于', pinyin: 'shǔ yú', loai: 'động từ', nghia: 'thuộc về, là của ai hay cái nào đó' },
+                { word: '人生', pinyin: 'rén shēng', loai: 'danh từ', nghia: 'cuộc đời, đời người' },
+                { word: '真正', pinyin: 'zhēn zhèng', loai: 'tính từ / phó từ', nghia: 'thực sự, đúng nghĩa đen; chân chính' },
+                { word: '超越', pinyin: 'chāo yuè', loai: 'động từ', nghia: 'vượt qua, vượt lên trên' },
+                { word: '从来', pinyin: 'cóng lái', loai: 'phó từ', nghia: 'từ xưa đến nay, bao giờ cũng (thường dùng trong cấu trúc phủ định)' },
+                { word: '而是', pinyin: 'ér shì', loai: 'liên từ', nghia: 'mà là (dùng trong cấu trúc đối lập "不是... 而是...")' },
+                { word: '放弃', pinyin: 'fàng qì', loai: 'động từ', nghia: 'từ bỏ, buông bỏ, không tiếp tục nữa' },
+                { word: '退缩', pinyin: 'tuì suō', loai: 'động từ', nghia: 'rụt lui, nao núng, tránh né thử thách' },
+                { word: '松懈', pinyin: 'sōng xiè', loai: 'động từ / tính từ', nghia: 'buông lỏng; lỏng lẻo, mất tinh thần tiến bộ' },
+                { word: '当', pinyin: 'dāng', loai: 'giới từ / liên từ', nghia: 'khi, vào lúc' },
+                { word: '你', pinyin: 'nǐ', loai: 'đại từ nhân xưng', nghia: 'bạn, cậu' },
+                { word: '就', pinyin: 'jiù', loai: 'phó từ', nghia: 'thì, liền; dễ dàng dẫn đến kết quả nào' },
+                { word: '把', pinyin: 'bǎ', loai: 'giới từ', nghia: 'đem, lấy (dùng trong cấu trúc "把" chỉ đối tượng bị tác động)' },
+                { word: '力', pinyin: 'lì', loai: 'danh từ', nghia: 'sức lực, năng lượng; khả năng' },
+                { word: '放', pinyin: 'fàng', loai: 'động từ', nghia: 'đặt, để; tập trung vào đâu đó' },
+                { word: '在', pinyin: 'zài', loai: 'giới từ / phó từ', nghia: 'ở; trong; đang (chỉ hành động đang diễn ra)' },
+                { word: '的', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'của; dùng tạo cấu trúc định ngữ bổ nghĩa danh từ' },
+                { word: '光', pinyin: 'guāng', loai: 'danh từ', nghia: 'ánh sáng; vinh quang, vẻ đẹp rạng rỡ' },
+                { word: '该', pinyin: 'gāi', loai: 'trợ động từ', nghia: 'nên, đáng lẽ phải làm gì' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ phủ định', nghia: 'không' },
+                { word: '是', pinyin: 'shì', loai: 'động từ phán đoán', nghia: 'là' },
+                { word: '那', pinyin: 'nà', loai: 'đại từ chỉ định', nghia: 'đó, kia' },
+                { word: '个', pinyin: 'gè', loai: 'lượng từ', nghia: 'cái, người (đơn vị đếm chung cho người và vật)' },
+                { word: '想', pinyin: 'xiǎng', loai: 'động từ', nghia: 'muốn, định làm gì; suy nghĩ' }
+            ],
+            pauseData: [{
+                zh: '当你选择追赶别人，就容易弄丢自己的方向，',
+                parts: ['当你选择', '追赶别人，', '就容易', '弄丢自己的方向，'],
+                vi: 'Khi bạn chọn đuổi theo người khác, bạn dễ đánh mất phương hướng của chính mình.'
+            }, {
+                zh: '只有把注意力放在自己身上，才能绽放属于自己的光，',
+                parts: ['只有把注意力', '放在自己身上，', '才能绽放', '属于自己的光，'],
+                vi: 'Chỉ khi đặt sự tập trung vào bản thân, bạn mới có thể tỏa sáng với ánh sáng của riêng mình.'
+            }, {
+                zh: '人生真正该超越的从来不是别人，而是那个想放弃、想退缩、想松懈的自己。',
+                parts: ['人生真正', '该超越的', '从来不是别人，', '而是那个', '想放弃、', '想退缩、', '想松懈的自己。'],
+                vi: 'Điều con người thực sự cần vượt qua trong cuộc đời không phải là người khác, mà chính là bản thân -- kẻ muốn từ bỏ, muốn lùi bước, muốn chùng lòng.'
+            }]
+        }, {
+            id: 'ziyou',
+            title: '真正的自由',
+            subtitle: 'Tự do thực sự',
+            icon: '🕊️',
+            chinese: '什么是自由呢？很多人以为，自由就是想干嘛就干嘛。其实，这不是自由，是放纵。真正的自由是：你有能力选择自己的生活；你有底气拒绝不想做的事；你不靠别人，也能活得有尊严。想要自由，就要学会自律和独立。你越自律，越独立，人生才会握在你自己手里。',
+            vietnamese: 'Thế nào là tự do? Nhiều người nghĩ rằng tự do là muốn làm gì thì làm. Thực ra, đó không phải là tự do, mà là buông thả. Tự do thực sự là: bạn có khả năng lựa chọn cuộc sống của mình; bạn có đủ bản lĩnh để từ chối những điều mình không muốn; bạn không dựa dẫm vào ai mà vẫn có thể sống có phẩm giá. Muốn có tự do, bạn phải học cách tự giác và độc lập. Bạn càng tự giác, càng độc lập, thì cuộc đời bạn mới nằm trong tay bạn.',
+            vocabulary: [
+                { word: '什么', pinyin: 'shén me', loai: 'đại từ nghi vấn', nghia: 'cái gì, việc gì (dùng trong câu hỏi nghi vấn)' },
+                { word: '自由', pinyin: 'zì yóu', loai: 'danh từ / tính từ', nghia: 'tự do; sự không bị ràng buộc, có quyền tự quyết bản thân' },
+                { word: '很多', pinyin: 'hěn duō', loai: 'tính từ', nghia: 'rất nhiều, số lượng lớn' },
+                { word: '以为', pinyin: 'yǐ wéi', loai: 'động từ', nghia: 'nghĩ là, cho là (thường mang ý nghĩa nhận định sai lệch)' },
+                { word: '就是', pinyin: 'jiù shì', loai: 'phó từ / cụ từ nhấn mạnh', nghia: 'chính là, tức là; đúng là' },
+                { word: '干嘛', pinyin: 'gàn má', loai: 'đại từ nghi vấn', nghia: 'làm gì, việc gì (giọng văn khẩu ngữ, thân mật)' },
+                { word: '其实', pinyin: 'qí shí', loai: 'phó từ', nghia: 'thực ra, trên thực tế, nói cho đúng sự thật' },
+                { word: '放纵', pinyin: 'fàng zòng', loai: 'danh từ / tính từ', nghia: 'sự buông thả; vô độ, không tự kiềm chế hành vi' },
+                { word: '真正', pinyin: 'zhēn zhèng', loai: 'tính từ / phó từ', nghia: 'thực sự, đúng nghĩa đen; chân chính, không giả dối' },
+                { word: '能力', pinyin: 'néng lì', loai: 'danh từ', nghia: 'năng lực, khả năng hoàn thành việc gì đó' },
+                { word: '选择', pinyin: 'xuǎn zé', loai: 'động từ / danh từ', nghia: 'lựa chọn; sự quyết định hướng đi hay đối tượng' },
+                { word: '自己', pinyin: 'zì jǐ', loai: 'đại từ', nghia: 'bản thân, tự mình, chính mình' },
+                { word: '生活', pinyin: 'shēng huó', loai: 'danh từ / động từ', nghia: 'cuộc sống; sinh hoạt, tồn tại hàng ngày' },
+                { word: '底气', pinyin: 'dǐ qì', loai: 'danh từ', nghia: 'sự tự tin vững chắc, lòng dũng cảm dựa trên năng lực bản thân' },
+                { word: '拒绝', pinyin: 'jù jué', loai: 'động từ', nghia: 'từ chối, không đồng ý thực hiện hay chấp nhận điều gì' },
+                { word: '不想', pinyin: 'bù xiǎng', loai: 'động từ', nghia: 'không muốn, không định làm điều gì' },
+                { word: '别人', pinyin: 'bié rén', loai: 'đại từ / danh từ', nghia: 'người khác, người bên ngoài bản thân' },
+                { word: '尊严', pinyin: 'zūn yán', loai: 'danh từ', nghia: 'phẩm giá, sự tôn nghiêm, nhân phẩm cao quý' },
+                { word: '想要', pinyin: 'xiǎng yào', loai: 'động từ', nghia: 'muốn, mong muốn có được hay thực hiện điều gì' },
+                { word: '学会', pinyin: 'xué huì', loai: 'động từ', nghia: 'học được, nắm vững kiến thức hay kỹ năng nào đó' },
+                { word: '自律', pinyin: 'zì lǜ', loai: 'danh từ / động từ', nghia: 'tự luật; sự tự kiềm chế, tự điều chỉnh hành vi' },
+                { word: '独立', pinyin: 'dú lì', loai: 'tính từ / động từ', nghia: 'độc lập; tự chủ, không dựa dẫm vào người khác' },
+                { word: '人生', pinyin: 'rén shēng', loai: 'danh từ', nghia: 'cuộc đời, toàn bộ thời gian tồn tại của con người' },
+                { word: '手里', pinyin: 'shǒu lǐ', loai: 'danh từ', nghia: 'trong tay; (nghĩa bóng) trong tầm kiểm soát, nắm giữ' },
+                { word: '呢', pinyin: 'ne', loai: 'trợ từ nghi vấn', nghia: 'dùng cuối câu hỏi, tăng sắc thái thảo luận nhẹ nhàng' },
+                { word: '人', pinyin: 'rén', loai: 'danh từ', nghia: 'người, con người' },
+                { word: '想', pinyin: 'xiǎng', loai: 'động từ', nghia: 'muốn; suy nghĩ, tưởng tượng' },
+                { word: '就', pinyin: 'jiù', loai: 'phó từ', nghia: 'thì, liền; nhấn mạnh sự chắc chắn' },
+                { word: '这', pinyin: 'zhè', loai: 'đại từ chỉ định', nghia: 'này, đây' },
+                { word: '不', pinyin: 'bù', loai: 'phó từ phủ định', nghia: 'không' },
+                { word: '是', pinyin: 'shì', loai: 'động từ phán đoán', nghia: 'là' },
+                { word: '有', pinyin: 'yǒu', loai: 'động từ', nghia: 'có, tồn tại' },
+                { word: '你', pinyin: 'nǐ', loai: 'đại từ nhân xưng', nghia: 'bạn, cậu' },
+                { word: '做', pinyin: 'zuò', loai: 'động từ', nghia: 'làm, thực hiện hành động' },
+                { word: '事', pinyin: 'shì', loai: 'danh từ', nghia: 'việc, sự việc, công việc' },
+                { word: '靠', pinyin: 'kào', loai: 'động từ / giới từ', nghia: 'dựa vào, nhờ cậy; tựa vào' },
+                { word: '也', pinyin: 'yě', loai: 'phó từ', nghia: 'cũng, đều' },
+                { word: '活', pinyin: 'huó', loai: 'động từ / tính từ', nghia: 'sống; còn sống, tồn tại' },
+                { word: '得', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'dùng sau động từ/tính từ chỉ mức độ hay kết quả hành động' },
+                { word: '要', pinyin: 'yào', loai: 'trợ động từ', nghia: 'phải, cần phải; muốn' },
+                { word: '和', pinyin: 'hé', loai: 'liên từ', nghia: 'và, cùng với' },
+                { word: '越', pinyin: 'yuè', loai: 'phó từ', nghia: 'càng (dùng trong cấu trúc chỉ mức độ tăng tiến)' },
+                { word: '才', pinyin: 'cái', loai: 'phó từ', nghia: 'mới, chỉ khi đáp ứng điều kiện mới xảy ra kết quả' },
+                { word: '握', pinyin: 'wò', loai: 'động từ', nghia: 'nắm chặt, cầm giữ trong tay' },
+                { word: '在', pinyin: 'zài', loai: 'giới từ / phó từ', nghia: 'ở, trong; đang (chỉ hành động đang diễn ra)' },
+                { word: '的', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'của; dùng tạo cấu trúc định ngữ bổ nghĩa danh từ' }
+            ],
+            pauseData: [{
+                zh: '什么是自由呢？很多人以为，自由就是想干嘛就干嘛。',
+                parts: ['什么是自由呢？', '很多人以为，', '自由就是', '想干嘛就干嘛。'],
+                vi: 'Thế nào là tự do? Nhiều người nghĩ rằng tự do là muốn làm gì thì làm.'
+            }, {
+                zh: '其实，这不是自由，是放纵。',
+                parts: ['其实，', '这不是自由，', '是放纵。'],
+                vi: 'Thực ra, đó không phải là tự do, mà là buông thả.'
+            }, {
+                zh: '真正的自由是：你有能力选择自己的生活；你有底气拒绝不想做的事；你不靠别人，也能活得有尊严。',
+                parts: ['真正的自由是：', '你有能力', '选择自己的生活；', '你有底气', '拒绝不想做的事；', '你不靠别人，', '也能活得有尊严。'],
+                vi: 'Tự do thực sự là: bạn có khả năng lựa chọn cuộc sống của mình; bạn có đủ bản lĩnh để từ chối những điều mình không muốn; bạn không dựa dẫm vào ai mà vẫn có thể sống có phẩm giá.'
+            }, {
+                zh: '想要自由，就要学会自律和独立。',
+                parts: ['想要自由，', '就要学会', '自律和独立。'],
+                vi: 'Muốn có tự do, bạn phải học cách tự giác và độc lập.'
+            }, {
+                zh: '你越自律，越独立，人生才会握在你自己手里。',
+                parts: ['你越自律，', '越独立，', '人生才会', '握在你自己手里。'],
+                vi: 'Bạn càng tự giác, càng độc lập, thì cuộc đời bạn mới nằm trong tay bạn.'
+            }]
+        }, {
+            id: 'zhijing',
+            title: '致敬劳动者',
+            subtitle: 'Tôn vinh người lao động',
+            icon: '🌟',
+            chinese: '每当太阳升起，都有无数的平凡者，为了一份责任、一份热爱、一份信念、一份坚守，在各自岗位上用辛勤的付出诠释劳动之美。为了祖国的繁荣，为了民族的富强，他们用勤劳的双手和智慧，挥汗水，洒热血，奉献无悔的青春。他们是微光，但足以照亮时代。微光聚爱，终成熠熠星光。致敬劳动者，平凡亦有光！',
+            vietnamese: 'Mỗi khi mặt trời mọc lên, có vô số những người bình dị, vì một phần trách nhiệm, một phần niềm đam mê, một phần niềm tin, một phần sự kiên trì giữ vững, trên từng cương vị công việc của riêng mình, dùng sự cống hiến cần cù vất vả để diễn giải vẻ đẹp của lao động. Vì sự phồn thịnh của tổ quốc, vì sự giàu mạnh của dân tộc, họ đã dùng đôi tay chăm chỉ và trí tuệ, vung mồ hôi, đổ máu nóng nhiệt huyết, hiến dâng tuổi thanh xuân không hối tiếc. Họ là những tia sáng nhỏ bé, nhưng đủ sức chiếu sáng cả thời đại. Những tia sáng yếu ớt hội tụ thành tình yêu, cuối cùng sẽ hóa thành ánh sao lấp lánh rạng rỡ. Kính trọng người lao động, sự bình thường cũng mang trong mình ánh sáng!',
+            vocabulary: [
+                { word: '致敬', pinyin: 'zhì jìng', loai: 'động từ / danh từ', nghia: 'tỏ lòng kính trọng; sự kính trọng, lời tri ân' },
+                { word: '劳动', pinyin: 'láo dòng', loai: 'động từ / danh từ', nghia: 'lao động; sự lao động' },
+                { word: '每当', pinyin: 'měi dāng', loai: 'liên từ', nghia: 'mỗi khi, bất cứ khi nào' },
+                { word: '太阳', pinyin: 'tài yáng', loai: 'danh từ', nghia: 'mặt trời' },
+                { word: '升起', pinyin: 'shēng qǐ', loai: 'động từ', nghia: 'mọc lên, nhô lên' },
+                { word: '无数', pinyin: 'wú shù', loai: 'tính từ', nghia: 'vô số, không đếm xuể' },
+                { word: '平凡', pinyin: 'píng fán', loai: 'tính từ / danh từ', nghia: 'bình thường, tầm thường; sự bình dị' },
+                { word: '为了', pinyin: 'wèi le', loai: 'giới từ', nghia: 'vì, nhằm mục đích' },
+                { word: '责任', pinyin: 'zé rèn', loai: 'danh từ', nghia: 'trách nhiệm' },
+                { word: '热爱', pinyin: 'rè ài', loai: 'động từ / danh từ', nghia: 'yêu mến nhiệt thành; niềm đam mê' },
+                { word: '信念', pinyin: 'xìn niàn', loai: 'danh từ', nghia: 'niềm tin, tín niệm' },
+                { word: '坚守', pinyin: 'jiān shǒu', loai: 'động từ / danh từ', nghia: 'kiên trì giữ vững; sự bền bỉ giữ vững lập trường' },
+                { word: '各自', pinyin: 'gè zì', loai: 'đại từ / tính từ', nghia: 'từng người, riêng từng vị trí' },
+                { word: '岗位', pinyin: 'gǎng wèi', loai: 'danh từ', nghia: 'vị trí công việc, cương vị' },
+                { word: '辛勤', pinyin: 'xīn qín', loai: 'tính từ', nghia: 'cần cù, vất vả, chăm chỉ' },
+                { word: '付出', pinyin: 'fù chū', loai: 'động từ / danh từ', nghia: 'dành ra, cống hiến; sự đóng góp sức lực' },
+                { word: '诠释', pinyin: 'quán shì', loai: 'động từ / danh từ', nghia: 'diễn giải, làm rõ ý nghĩa; sự giải thích' },
+                { word: '祖国', pinyin: 'zǔ guó', loai: 'danh từ', nghia: 'tổ quốc' },
+                { word: '繁荣', pinyin: 'fán róng', loai: 'tính từ / động từ', nghia: 'phồn thịnh, thịnh vượng; làm phát triển thịnh vượng' },
+                { word: '民族', pinyin: 'mín zú', loai: 'danh từ', nghia: 'dân tộc' },
+                { word: '富强', pinyin: 'fù qiáng', loai: 'tính từ', nghia: 'giàu mạnh, phú cường' },
+                { word: '他们', pinyin: 'tā men', loai: 'đại từ nhân xưng', nghia: 'họ' },
+                { word: '勤劳', pinyin: 'qín láo', loai: 'tính từ', nghia: 'cần cù, chăm chỉ' },
+                { word: '双手', pinyin: 'shuāng shǒu', loai: 'danh từ', nghia: 'đôi tay' },
+                { word: '智慧', pinyin: 'zhì huì', loai: 'danh từ', nghia: 'trí tuệ, sự thông minh sâu sắc' },
+                { word: '汗水', pinyin: 'hàn shuǐ', loai: 'danh từ', nghia: 'mồ hôi; (nghĩa bóng) sự vất vả lao động' },
+                { word: '热血', pinyin: 'rè xuè', loai: 'danh từ', nghia: 'máu nóng; lòng nhiệt huyết, tinh thần cống hiến' },
+                { word: '奉献', pinyin: 'fèng xiàn', loai: 'động từ / danh từ', nghia: 'cống hiến, hiến dâng; sự cống hiến' },
+                { word: '无悔', pinyin: 'wú huǐ', loai: 'tính từ', nghia: 'không hối tiếc, vô hối' },
+                { word: '青春', pinyin: 'qīng chūn', loai: 'danh từ', nghia: 'tuổi trẻ, thanh xuân' },
+                { word: '微光', pinyin: 'wēi guāng', loai: 'danh từ', nghia: 'ánh sáng yếu ớt, tia sáng nhỏ bé' },
+                { word: '足以', pinyin: 'zú yǐ', loai: 'động từ / phó từ', nghia: 'đủ để, đủ khả năng' },
+                { word: '照亮', pinyin: 'zhào liàng', loai: 'động từ', nghia: 'chiếu sáng, làm sáng tỏ' },
+                { word: '时代', pinyin: 'shí dài', loai: 'danh từ', nghia: 'thời đại, kỷ nguyên' },
+                { word: '熠熠', pinyin: 'yì yì', loai: 'tính từ', nghia: 'lấp lánh, óng ánh rạng rỡ' },
+                { word: '星光', pinyin: 'xīng guāng', loai: 'danh từ', nghia: 'ánh sao, ánh sáng của ngôi sao' },
+                { word: '者', pinyin: 'zhě', loai: 'trợ từ danh từ', nghia: 'người (dùng sau tính từ/động từ chỉ người mang đặc điểm đó)' },
+                { word: '都', pinyin: 'dōu', loai: 'phó từ', nghia: 'đều, tất cả' },
+                { word: '有', pinyin: 'yǒu', loai: 'động từ', nghia: 'có' },
+                { word: '的', pinyin: 'de', loai: 'trợ từ cấu trúc', nghia: 'của; dùng tạo cấu trúc định ngữ bổ nghĩa danh từ' },
+                { word: '一', pinyin: 'yī', loai: 'số từ', nghia: 'một' },
+                { word: '份', pinyin: 'fèn', loai: 'lượng từ', nghia: 'phần (đơn vị đếm tình cảm, công việc, món quà...)' },
+                { word: '在', pinyin: 'zài', loai: 'giới từ / động từ', nghia: 'ở; trong; đang (chỉ hành động đang diễn ra)' },
+                { word: '上', pinyin: 'shàng', loai: 'trợ từ phương hướng', nghia: 'trên; về mặt, trong lĩnh vực' },
+                { word: '用', pinyin: 'yòng', loai: 'động từ / giới từ', nghia: 'dùng, sử dụng; bằng, qua phương tiện' },
+                { word: '之', pinyin: 'zhī', loai: 'trợ từ cấu trúc', nghia: 'của (thể thức trang trọng, văn học)' },
+                { word: '美', pinyin: 'měi', loai: 'danh từ / tính từ', nghia: 'vẻ đẹp; đẹp, tốt đẹp' },
+                { word: '和', pinyin: 'hé', loai: 'liên từ', nghia: 'và, cùng với' },
+                { word: '挥', pinyin: 'huī', loai: 'động từ', nghia: 'vung, làm rơi ra; (nghĩa bóng) cống hiến sức lực' },
+                { word: '洒', pinyin: 'sǎ', loai: 'động từ', nghia: 'rải, đổ ra; (nghĩa bóng) hiến dâng, cống hiến' },
+                { word: '是', pinyin: 'shì', loai: 'động từ phán đoán', nghia: 'là' },
+                { word: '但', pinyin: 'dàn', loai: 'liên từ', nghia: 'nhưng' },
+                { word: '聚', pinyin: 'jù', loai: 'động từ', nghia: 'tụ tập, hội tụ, tập trung lại' },
+                { word: '爱', pinyin: 'ài', loai: 'danh từ / động từ', nghia: 'tình yêu; yêu thương, trân trọng' },
+                { word: '终', pinyin: 'zhōng', loai: 'phó từ', nghia: 'cuối cùng, rốt cuộc' },
+                { word: '成', pinyin: 'chéng', loai: 'động từ', nghia: 'trở thành, hóa thành' },
+                { word: '亦', pinyin: 'yì', loai: 'phó từ', nghia: 'cũng (thể thức trang trọng)' },
+                { word: '光', pinyin: 'guāng', loai: 'danh từ', nghia: 'ánh sáng; vinh quang' }
+            ],
+            pauseData: [{
+                zh: '每当太阳升起，都有无数的平凡者，为了一份责任、一份热爱、一份信念、一份坚守，在各自岗位上用辛勤的付出诠释劳动之美。',
+                parts: ['每当太阳升起，', '都有无数的平凡者，', '为了一份责任、', '一份热爱、', '一份信念、', '一份坚守，', '在各自岗位上', '用辛勤的付出', '诠释劳动之美。'],
+                vi: 'Mỗi khi mặt trời mọc lên, có vô số những người bình dị, vì một phần trách nhiệm, một phần niềm đam mê, một phần niềm tin, một phần sự kiên trì giữ vững, trên từng cương vị công việc của riêng mình, dùng sự cống hiến cần cù vất vả để diễn giải vẻ đẹp của lao động.'
+            }, {
+                zh: '为了祖国的繁荣，为了民族的富强，他们用勤劳的双手和智慧，挥汗水，洒热血，奉献无悔的青春。',
+                parts: ['为了祖国的繁荣，', '为了民族的富强，', '他们用勤劳的双手和智慧，', '挥汗水，', '洒热血，', '奉献无悔的青春。'],
+                vi: 'Vì sự phồn thịnh của tổ quốc, vì sự giàu mạnh của dân tộc, họ đã dùng đôi tay chăm chỉ và trí tuệ, vung mồ hôi, đổ máu nóng nhiệt huyết, hiến dâng tuổi thanh xuân không hối tiếc.'
+            }, {
+                zh: '他们是微光，但足以照亮时代。微光聚爱，终成熠熠星光。致敬劳动者，平凡亦有光！',
+                parts: ['他们是微光，', '但足以照亮时代。', '微光聚爱，', '终成熠熠星光。', '致敬劳动者，', '平凡亦有光！'],
+                vi: 'Họ là những tia sáng nhỏ bé, nhưng đủ sức chiếu sáng cả thời đại. Những tia sáng yếu ớt hội tụ thành tình yêu, cuối cùng sẽ hóa thành ánh sao lấp lánh rạng rỡ. Kính trọng người lao động, sự bình thường cũng mang trong mình ánh sáng!'
+            }]
+        }];
+
+        // ================================================================
+        //  应用状态
+        // ================================================================
+
+        let currentDocId = null;
+        let timerInterval = null;
+        let seconds = 0;
+        let isRunning = false;
+
+        // DOM 引用
+        const pageHome = document.getElementById('pageHome');
+        const pageStudy = document.getElementById('pageStudy');
+        const cardGrid = document.getElementById('cardGrid');
+        const studyTitle = document.getElementById('studyTitle');
+        const studySub = document.getElementById('studySub');
+        const chineseText = document.getElementById('chineseText');
+        const detailContent = document.getElementById('detailContent');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const btnStart = document.getElementById('timerStart');
+        const btnPause = document.getElementById('timerPause');
+        const btnStop = document.getElementById('timerStop');
+        const btnTranslate = document.getElementById('btnTranslate');
+        const btnPausePractice = document.getElementById('btnPausePractice');
+        const backHome = document.getElementById('backHome');
+
+        // 模态框
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalClose = document.getElementById('modalClose');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+
+        // ================================================================
+        //  工具函数
+        // ================================================================
+
+        function formatTime(sec) {
+            const m = String(Math.floor(sec / 60)).padStart(2, '0');
+            const s = String(sec % 60).padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function tokenizeChinese(text, vocab) {
+            const sorted = vocab.slice().sort((a, b) => b.word.length - a.word.length);
+            const tokens = [];
+            let i = 0;
+            while (i < text.length) {
+                let matched = false;
+                for (let item of sorted) {
+                    const w = item.word;
+                    if (text.substr(i, w.length) === w) {
+                        tokens.push({
+                            word: w,
+                            data: item,
+                            start: i,
+                            end: i + w.length
+                        });
+                        i += w.length;
+                        matched = true;
+                        break;
+                    }
+                }
+                if (!matched) {
+                    const ch = text[i];
+                    const isPunct = /[，。；！？、,.;!?]/.test(ch);
+                    tokens.push({
+                        word: ch,
+                        data: null,
+                        start: i,
+                        end: i + 1,
+                        isPunct: isPunct
+                    });
+                    i++;
+                }
+            }
+            return tokens;
+        }
+
+        function renderChineseText(tokens) {
+            let html = '';
+            for (let t of tokens) {
+                if (t.data) {
+                    html += `<span class="word-token" data-word="${t.word}" data-pinyin="${t.data.pinyin}" data-loai="${t.data.loai}" data-nghia="${t.data.nghia}">${t.word}</span>`;
+                } else {
+                    html += t.word;
+                }
+            }
+            return html;
+        }
+
+        function showPlaceholder() {
+            detailContent.innerHTML = `
+                <div class="detail-placeholder">
+                    🖱 悬停词汇 ·<br />Di chuột vào từ để xem chi tiết
+                </div>
+            `;
+        }
+
+        function showWordDetail(word, pinyin, loai, nghia) {
+            detailContent.innerHTML = `
+                <div class="detail-item">
+                    <span class="label">汉字 · Hán tự</span>
+                    <div class="value hanzi">${word}</div>
+                </div>
+                <div class="detail-item">
+                    <span class="label">拼音 · Phiên âm</span>
+                    <div class="value pinyin">${pinyin}</div>
+                </div>
+                <div class="detail-divider"></div>
+                <div class="detail-item">
+                    <span class="label">TỪ LOẠI</span>
+                    <div class="value loai">${loai}</div>
+                </div>
+                <div class="detail-item">
+                    <span class="label">NGHĨA</span>
+                    <div class="value nghia">${nghia}</div>
+                </div>
+            `;
+        }
+
+        // ================================================================
+        //  主页渲染
+        // ================================================================
+
+        function renderHome() {
+            cardGrid.innerHTML = '';
+            DOCUMENTS.forEach(doc => {
+                const card = document.createElement('div');
+                card.className = 'doc-card';
+                card.innerHTML = `
+                    <div class="card-icon">${doc.icon || '📄'}</div>
+                    <div class="card-zh">${doc.title}</div>
+                    <div class="card-vi">${doc.subtitle}</div>
+                `;
+                card.addEventListener('click', () => openStudy(doc.id));
+                cardGrid.appendChild(card);
+            });
+        }
+
+        // ================================================================
+        //  学习页面
+        // ================================================================
+
+        function openStudy(docId) {
+            const doc = DOCUMENTS.find(d => d.id === docId);
+            if (!doc) return;
+
+            currentDocId = docId;
+            pageHome.classList.add('hidden');
+            pageStudy.classList.add('active');
+
+            // 标题
+            studyTitle.textContent = doc.title;
+            studySub.textContent = doc.subtitle;
+
+            // 文本
+            const tokens = tokenizeChinese(doc.chinese, doc.vocabulary);
+            chineseText.innerHTML = renderChineseText(tokens);
+            showPlaceholder();
+
+            // 词汇悬浮事件
+            chineseText.querySelectorAll('.word-token').forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    const word = this.dataset.word;
+                    const pinyin = this.dataset.pinyin;
+                    const loai = this.dataset.loai;
+                    const nghia = this.dataset.nghia;
+                    if (word && pinyin && loai && nghia) {
+                        showWordDetail(word, pinyin, loai, nghia);
+                        chineseText.querySelectorAll('.word-token').forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            chineseText.addEventListener('mouseleave', function(e) {
+                const target = e.relatedTarget;
+                if (!target || !target.closest('.text-chinese')) {
+                    setTimeout(() => {
+                        if (!document.querySelector('.word-token:hover')) {
+                            showPlaceholder();
+                            chineseText.querySelectorAll('.word-token').forEach(t => t.classList.remove('active'));
+                        }
+                    }, 80);
+                }
+            });
+
+            // 重置计时器
+            stopTimer(true);
+
+            // 存储文档数据供按钮使用
+            window._currentDoc = doc;
+        }
+
+        // ================================================================
+        //  计时器
+        // ================================================================
+
+        function updateDisplay() {
+            timerDisplay.textContent = formatTime(seconds);
+        }
+
+        function stopTimer(reset = true) {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            isRunning = false;
+            if (reset) {
+                seconds = 0;
+                updateDisplay();
+            }
+            btnStart.disabled = false;
+            btnPause.disabled = true;
+            btnStop.disabled = true;
+            btnStart.textContent = '开始 / Bắt đầu';
+        }
+
+        btnStart.addEventListener('click', function() {
+            if (isRunning) return;
+            if (seconds === 0) {
+                stopTimer(true);
+            }
+            isRunning = true;
+            btnStart.disabled = true;
+            btnPause.disabled = false;
+            btnStop.disabled = false;
+            btnStart.textContent = '运行中 · Đang chạy';
+            timerInterval = setInterval(() => {
+                seconds++;
+                updateDisplay();
+            }, 1000);
+        });
+
+        btnPause.addEventListener('click', function() {
+            if (!isRunning) return;
+            isRunning = false;
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            btnStart.disabled = false;
+            btnPause.disabled = true;
+            btnStart.textContent = '继续 · Tiếp tục';
+        });
+
+        btnStop.addEventListener('click', function() {
+            stopTimer(true);
+            btnStart.textContent = '开始 / Bắt đầu';
+        });
+
+        // ================================================================
+        //  模态框
+        // ================================================================
+
+        function openModal(title, html) {
+            modalTitle.textContent = title;
+            modalBody.innerHTML = html;
+            modalOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ================================================================
+        //  底部按钮
+        // ================================================================
+
+        btnTranslate.addEventListener('click', function() {
+            const doc = window._currentDoc;
+            if (!doc) return;
+            const html = `
+                <div class="label-zh">📌 中文 · Tiếng Trung</div>
+                <div style="font-family:'STKaiti','KaiTi','楷体','华文楷体',serif; font-size:1.3rem; line-height:2.0; padding:6px 0 10px 0;">
+                    ${doc.chinese}
+                </div>
+                <div class="label-vi">📌 越南语 · Tiếng Việt</div>
+                <div class="vietnamese-block" style="border-top:none; margin-top:4px; padding-top:4px;">
+                    ${doc.vietnamese}
+                </div>
+                <div style="margin-top:18px; font-family:'Times New Roman',serif; font-size:0.85rem; color:#b09a84; text-align:right; border-top:1px dashed #ede5dc; padding-top:14px;">
+                    ✦ 一起朗读 · Cùng luyện đọc nha!
+                </div>
+            `;
+            openModal('📖 看翻译版 · XEM BẢN DỊCH', html);
+        });
+
+        btnPausePractice.addEventListener('click', function() {
+            const doc = window._currentDoc;
+            if (!doc || !doc.pauseData) return;
+
+            const pauseColors = ['#CB8A7A', '#7FAF9A', '#7A9BCB', '#D4A86A', '#B58DB8', '#8AB3A8', '#D49A8A', '#A8B5C0'];
+            let pauseHtml = '';
+            doc.pauseData.forEach((item, idx) => {
+                const partsHtml = item.parts.map((part, pi) => {
+                    const c = pauseColors[(idx + pi + 1) % pauseColors.length];
+                    return `<span class="pause-part" style="background:${c}22; color:#1e1a16; border-radius:4px; padding:2px 6px; margin:0 2px;">${part}</span>`;
+                }).join('<span class="pause-slash"> / </span>');
+                pauseHtml += `<div style="margin-bottom:16px; padding:8px 4px; border-radius:8px; background:#fcf9f6;">${partsHtml}</div>`;
+            });
+
+            const viFull = doc.pauseData.map(d => d.vi).join(' ');
+
+            const headerHtml = `
+                <div class="pause-header">
+                    <div class="title-zh">📌 ${doc.title}</div>
+                    <div class="title-vi">${doc.subtitle}</div>
+                </div>
+            `;
+
+            const html = `
+                ${headerHtml}
+                <div style="font-size:0.9rem; color:#b09a84; margin-bottom:14px; font-family:'Times New Roman',serif;">
+                    <span style="background:#f0e8e0; padding:2px 12px; border-radius:20px;">/</span> 表示停顿 · dấu ngắt câu
+                </div>
+                <div class="chinese-block" style="padding-top:4px;">
+                    ${pauseHtml}
+                </div>
+                <div class="label-vi" style="margin-top:20px;">📌 越南语完整版 · Bản dịch đầy đủ</div>
+                <div class="vietnamese-block" style="border-top:none; margin-top:2px; padding-top:6px; font-size:1.15rem;">
+                    ${viFull}
+                </div>
+                <div style="margin-top:18px; font-family:'Times New Roman',serif; font-size:0.8rem; color:#b09a84; text-align:right; border-top:1px dashed #ede5dc; padding-top:14px;">
+                    ✦ LUYỆN ĐỌC CÙNG CÔ TUYẾT NHA!
+                </div>
+            `;
+            openModal('✧ 练停顿 · LUYỆN NGẮT NGHỈ', html);
+        });
+
+        // ================================================================
+        //  返回主页
+        // ================================================================
+
+        backHome.addEventListener('click', function() {
+            stopTimer(true);
+            pageStudy.classList.remove('active');
+            pageHome.classList.remove('hidden');
+            window._currentDoc = null;
+        });
+
+        // ================================================================
+        //  初始化
+        // ================================================================
+
+        renderHome();
+
+        console.log('✅ VUI HỌC TIẾNG TRUNG CÙNG CÔ TUYẾT！');
+        console.log(`📚 共 ${DOCUMENTS.length} 个文档已加载。`);
+    </script>
+
+</body>
+</html>
